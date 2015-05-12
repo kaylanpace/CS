@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*,workorder.WorkOrder"%>
+<%@page import="java.util.*,navigationRes.*"%>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,15 +35,15 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
  
     <body>
-
-  <h1>Login Page</h1> 
-  	<center> 
-  	<h2>Signup Details</h2> 
-  	<form action="LoginCheck.jsp" method="post">
-  	 <br/>Username:<input type="text" name="username"> 
-  	 <br/>Password:<input type="password" name="password" style="width: 171px;"> 
+<center> 
+  	<h1>Login</h1> 
+  	<form action="LoginCheck" method="post">
+  	 <br/>Username:<input type="text" class="form-control" name="username" style="width: 30%;"> 
   	 <br>
-  	 <br/><input type="submit" value="Submit"> 
+  	  Password:<input type="password" class="form-control" name="password" style="width: 30%;"> 
+  	 <br>
+  	 <input type="submit"  value="Submit" > 
+  	 <!-- onclick="document.location.href='/Construction/admin-viewWorkOrders'" -->
   	 </form> 
   	 </center> 
     </body>

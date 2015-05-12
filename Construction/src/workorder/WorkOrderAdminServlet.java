@@ -1,6 +1,7 @@
 package workorder;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -29,15 +30,17 @@ public class WorkOrderAdminServlet extends HttpServlet {
 	 */
  // Injected DAO EJB:
     @EJB WorkOrderDao workorderDao;
-    //@EJB employee.EmployeeDao employeeDao;
+    @EJB employee.EmployeeDao employeeDao;
  
     @Override
     public void doGet(
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
+    	List<WorkOrder> list = workorderDao.getWorkOrders();
         // Display the list of workorders:
-       request.setAttribute("workorders", workorderDao.getWorkOrders());
+       request.setAttribute("workorders", list);
+       request.setAttribute("employees", employeeDao.getEmployees());
         request.getRequestDispatcher("/admin-viewWorkOrders.jsp").forward(request, response);
         
         return;
@@ -49,7 +52,7 @@ public class WorkOrderAdminServlet extends HttpServlet {
     protected void doPost(
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    		workorderDao.openTransaction();
+    		//.openTransaction();
     	
        // Handle a new work order:
     	
@@ -59,7 +62,7 @@ public class WorkOrderAdminServlet extends HttpServlet {
         
         if (description != null){
         	workorderDao.persist(new WorkOrder(description, priorityLevel, status));
-        	workorderDao.commitTransaction();
+        	//workorderDao.commitTransaction();
         }
        
         

@@ -163,7 +163,7 @@
                         
                     </div>
                     <!-- /.col-lg-12 -->
-                    <button type="button"onclick="document.location.href='admin-viewWorkOrders.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 136px; ">Work Orders</button>
+                    <button type="button"onclick="document.location.href='/Construction/admin-viewWorkOrders'" class="btn btn-outline btn-primary btn-lg" style="width: 136px; ">Work Orders</button>
                         <a href="admin-addWorkOrders.html">  <button type="button"onclick="document.location.href='employee.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 138px; ">Employees</button></a>
                         <button type="button"onclick="document.location.href='?.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 141px; ">  Supplies </button>
                 </div>

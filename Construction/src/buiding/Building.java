@@ -46,7 +46,7 @@ public class Building implements Serializable {
 	//POC one to one FK
 	@OneToOne(optional=true)
     @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
-    public POC pocId;
+    private POC pocId;
 
     // Constructors:
     public Building() {

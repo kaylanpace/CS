@@ -38,7 +38,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+<a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
@@ -57,35 +57,39 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form" method="POST" action="supplies">
+                                    <form role="form" method="POST" action="supplies" style="width: 630px; ">
                                         <div class="form-group">
                                             <label>Supply Name</label>
                                             <input class="form-control" type="text" name="supplyName" placeholder="Supply name">
                                         </div>
                                         <div class="form-group">
                                             <label>Quantity</label>
-                                            <input class="form-control" type="number" name="quantity" placeholder="Format: 30">
+                                            <input class="form-control" type="text" name="quantity" placeholder="Format: 30">
                                         </div>
-                                        <div class="form-group">
-                                            <label>UOM</label>
-                                            <input class="form-control" type="text" name="UOM" placeholder="UOM">
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <label>Description</label>
                                             <input class="form-control" type="text" name="description" placeholder="Description">
                                         </div>
                                         <div class="form-group">
                                             <label>Expiration Date</label>
-                                            <input class="form-control" type="date" name="expirationDate" placeholder="Format: MM-DD-YYYY">
+                                            <input class="form-control" type="date" name="expirationDate" placeholder="Format: MM/dd/yyyy">
                                         </div>
+                                       
                                         <div class="form-group">
-                                            <label>Vendor POC</label>
-                                            <input class="form-control" type="text" name="vendorPOC" placeholder="Vendor POC">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Check Cycle</label>
-                                            <input class="form-control" type="date" name="checkCycle" placeholder="Format: MM-DD-YYYY">
-                                        </div>
+                                            <label for="dp">Check Cycle</label>
+                                            <input class="form-control" type="date" name="checkCycle" placeholder="Format: MM/dd/yyyy">
+                                        </div> 
+                                        
+                                        <script src="js/jquery.min.js"></script>
+    									<script src="js/jquery-ui.min.js"></script>
+    									<script src="js/bootstrap.min.js"></script>
+   										 <script>
+     									 $( "#dp" ).datepicker({
+										changeMonth: true,
+										changeYear: true
+										 });
+    									</script>
                                         <button type="submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
@@ -110,24 +114,12 @@
                     <tr>
                         <th>Supply Name</th>
                         <th>Quantity</th>
-                        <th>UOM</th>
                         <th>Description</th>
                         <th>Expiration Date</th>
-                        <th>Vendor POC</th>
                         <th>Check Cycle</th>
                     </tr>
                 </thead>
-                <tfoot>
-                    <tr>
-                        <th>Supply Name</th>
-                        <th>Quantity</th>
-                        <th>UOM</th>
-                        <th>Description</th>
-                        <th>Expiration Date</th>
-                        <th>Vendor POC</th>
-                        <th>Check Cycle</th>
-                    </tr>
-                </tfoot>
+               
                     <%
                       @SuppressWarnings("unchecked")
                       List<Supplies> suppliess = (List<Supplies>)request.getAttribute("supplies");
@@ -149,9 +141,7 @@
                         <td>
                             <%= supplies.getExpirationDate() %>
                         </td>
-                        <td>
-                            <%= supplies.getVendorPOC() %>
-                        </td>
+                        
                         <td>
                             <%= supplies.getCheckCycle() %>
                         </td>

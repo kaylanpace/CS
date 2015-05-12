@@ -3,13 +3,18 @@
 <%@page import="java.util.*,employee.Employee"%>
 <%@page import="java.util.*,buiding.Building"%>
 <%@page import="java.util.*,supplies.Supplies"%>
+
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
+   
     
 <html lang="en">
 
 <head>
 
+	
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,17 +22,20 @@
     <meta name="author" content="">
 
     <title>ConstructionPal - Work Orders</title>
+    
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+    <script src="browser_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    
+    
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="css/grid.css" rel="stylesheet">
+    
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     
-    <!-- DataTables CSS -->
-    <link href="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
+    
     <!-- DataTables Responsive CSS -->
     <link href="bower_components/datatables/media/css/jquery.dataTables.css" rel="stylesheet">
 
@@ -41,13 +49,44 @@
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
+	<script>
+	$(document).ready(function() {
+    var table = $('#example').DataTable();
+ 
+    $('#example tbody').on( 'click', 'tr', function () {
+        
+        $(this).toggleClass('selected')
+        clearVals();
+       
+    } );
+   
+} );
+	</script> 
+	<script text="text/javascript">
+		function clearVals(){
+		document.getElementById("woId").innerHTML = "";
+ document.getElementById("woDes").innerHTML = "";
+ document.getElementById("woPL").innerHTML = "";
+ document.getElementById("woStatus").innerHTML = " ";
+		}
+	</script>
+	<script text="text/javascript">
+function getTdValue() {
+ var wwwwId = document.getElementById("workId").innerHTML;
+ var wwwwDes = document.getElementById("workDes").innerHTML;
+ var wwwwPL = document.getElementById("workPL").innerHTML;
+ var wwwwStatus = document.getElementById("workStatus").innerHTML;
+ 
+ document.getElementById("woId").innerHTML = wwwwId;
+ document.getElementById("woDes").innerHTML = wwwwDes;
+ document.getElementById("woPL").innerHTML = wwwwPL;
+ document.getElementById("woStatus").innerHTML = wwwwStatus;
+
+ alert(wwwwId);
+}
+</script>
+	
 </head>
 
 <body>
@@ -169,50 +208,35 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Work Orders</h1>
                         
-                        <table id="workorderGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
-                            <thead>
+                        <table id="example" class="display" cellspacing="0" width="100%">
+			                     <thead>    
                                 <tr>
-                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Work Order ID</th>
+                                    <th>Work Order ID</th>
                                     <th>Description</th>
                                     <th>Priority Level</th>
                                     <th>Status</th>
                                 </tr>
-                            </thead>
-                           
-                               <%
-                          @SuppressWarnings("unchecked")
-                          List<WorkOrder> workorders = (List<WorkOrder>)request.getAttribute("workorders");
-                           if (workorders != null) {
-                            for (WorkOrder workorder : workorders) {
-                          %>
-                          <tbody>
-                       <tr>
-                      		<td>
-                                    <%= workorder.getWorkorderId() %>
-                            </td>
-                            
-                            <td>
-                                    <%= workorder.getDescription() %>
-                            </td>
-                            
-                            <td>
-                                    <%= workorder.getPriorityLevel() %>
-                            </td>
-                            <td>
-                                    <%= workorder.getStatus() %>
-                            </td>
-                      </tr> 
-                      </tbody>
-                      <%
-                           }
-                          %>
-                          <%
-                           }
-                          %>
-            </table>
+                                </thead>
+                                <tbody>
+                                <c:forEach var="wr" items="${workorders}">
+         							<tr>
+         								<td id=workId>"${wr.getWorkorderId()}"</td>
+         								<td id=workDes>"${wr.getDescription()}"</td>
+         								<td id=workPL>"${wr.getPriorityLevel()}"</td>
+         								<td id=workStatus>"${wr.getStatus()}"</td>
+         							</tr>
+           
+        						</c:forEach>
+           						</tbody>                 
+                   
+            			</table>
+            
+           
                         
-                        <button id="woS" type="button" class="btn btn-outline btn-primary btn-lg">Select work order</button>
+                        <button id="woS" type="button" onclick="getTdValue()" class="btn btn-outline btn-primary btn-lg">Select work order</button>
                         <a href="/Construction/workorder"><button type="button" class="btn btn-outline btn-primary btn-lg">Add new work order</button></a>
+                        
+                        
                         
                         <hr>
                         
@@ -226,95 +250,47 @@
                                     <li><a data-toggle="tab" href="#sectionE">Point of contact</a></li>
                                     <li><a data-toggle="tab" href="#sectionF">Update status</a></li>
                                 </ul>
+                                
                                 <div class="tab-content">
                                     <div id="sectionA" class="tab-pane fade in active">
                                         <h3>Work order information</h3>
                                         <table id="workOrderInfoGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                             <tr>
                                                 <td><b>Work Order ID</b></td>
-                                                <td id= woId></td>
+                                                <td id= woId style="width: 481px; "> </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Description</b></td>
-                                                <td></td>
+                                                <td id= woDes style="width: 481px; "></td>
                                             </tr>
-                                            <tr>
-                                                <td><b>Building ID</b></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Point of Contact</b></td>
-                                                <td></td>
-                                            </tr>
+                                            
                                             <tr>
                                                 <td><b>Priority Level</b></td>
-                                                <td></td>
+                                                <td id= woPL style="width: 481px; "></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Status</b></td>
-                                                <td></td>
+                                                <td id= woStatus style="width: 481px; "></td>
                                             </tr>
-                                            <tr>
-                                                <td><b>Start Date</b></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Finish Date</b></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td><b>Expected Finish Date</b></td>
-                                                <td></td>
-                                            </tr>
-                                        </table>
+                                    </table>
                                     </div>
                                    
                                     <div id="sectionB" class="tab-pane fade">
                                         <h3>Assigned employees</h3>
-                <table id="employeeGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
-			    <thead>
-			        <tr>
-			            <th>First Name</th>
-			            <th>Last Name</th>
-			            <th>Social Security Number</th>
-			            <th>Position</th>
-			            <th>Age</th>
-			            <th>Administrator</th>
-			        </tr>
-			    </thead>
-			   
-                                                 <%
-				      @SuppressWarnings("unchecked")
-				      List<Employee> employees = (List<Employee>)request.getAttribute("employees");
-				       if (employees != null) {
-				        for (Employee employee : employees) {
-				      %>
-			          <tr>
-			          	<td>
-			          		<%= employee.getEmpFirstName() %>
-			          	</td>
-			          	<td>
-			          		<%= employee.getEmpLastName() %>
-			          	</td>
-			          	<td>
-			          		<%= employee.getSsn() %>
-			          	</td>
-			          	<td>
-			          		<%= employee.getPosition() %>
-			          	</td>
-			          	<td>
-			          		<%= employee.getAge() %>
-			          	</td>
-			          	<td>
-			          		<%= employee.isAdmin() %>
-			          	</td>
-			          </tr>
-			          <%
-				       }
-				      %>
-				      <%
-				       }
-				      %>
+                 <table id="employeeGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Employee ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>SSN</th>
+                                    <th>Position</th>
+                                    <th>Age</th>
+                                    <th>isAdmin</th>
+                                </tr>
+                            </thead>
+                           
+                      
 			</table>
 
                                        <button type="button" class="btn btn-outline btn-primary btn-lg">Assign employees</button></a>
@@ -330,26 +306,7 @@
                                                 </tr>
                                             </thead>
                                            
-                                                <!-- <%
-                                                      @SuppressWarnings("unchecked")
-                                                      List<Building> buildings = (List<Building>)request.getAttribute("buildings");
-                                                       if (buildings != null) {
-                                                        for (Building building : buildings) {
-                                                      %> -->
-                                                  <tr>
-                                                        <td>
-                                                                <!-- <%= building.getId() %> -->
-                                                        </td>
-                                                        <td>
-                                                                <!-- <%= building.getBuildingName() %> -->
-                                                        </td>
-                                                  </tr>
-                                                  <!-- <%
-                                                       }
-                                                      %>
-                                                      <%
-                                                       }
-                                                      %> -->
+                                                
                                         </table>
                                     </div>
                                     <div id="sectionD" class="tab-pane fade">
@@ -363,29 +320,9 @@
                                                 </tr>
                                             </thead>
                                           
-                                                <!-- <%
-                                                      @SuppressWarnings("unchecked")
-                                                      List<Supplies> suppliesList = (List<Supplies>)request.getAttribute("suppliesList");
-                                                       if (suppliesList != null) {
-                                                        for (Supplies supplies : suppliesList) {
-                                                      %> -->
-                                                  <tr>
-                                                        <td>
-                                                                <!-- <%= supplies.getId() %> -->
-                                                        </td>
-                                                        <td>
-                                                                <!--  <%= supplies.getSupplyName() %> -->
-                                                        </td>
-                                                       
-                                                  </tr>
-                                                  <%
-                                                       }
-                                                      %>
-                                                      <%
-                                                       }
-                                                      %> 
+                                               
                                         </table>
-                                    </div> --%>
+                                    </div>
                                     <div id="sectionE" class="tab-pane fade">
                                         <h3>Point of contact</h3>
                                         <table id="pocGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -486,18 +423,15 @@
 $(document).ready(
 		function() {
     var table = $('#workorderGrid').DataTable();
-    $('#workorderGrid tbody').on( 'click', 'tr', function () {
+    /* $('#workorderGrid tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
             $(this).removeClass('selected');
             var row = $('#workorderGrid').datagrid('getSelected');
     if (row){
-    alert('Item ID:'+row.id);
-        }
-        else {
-            table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-        }
-    } });
+     return row.index[0];
+    }
+     }
+     }); */
  
 } );
     </script>
@@ -507,7 +441,12 @@ $(document).ready(
     if (row){
     alert('Item ID:'+row.itemid+"\nPrice:"+row.listprice);
 }</script>
-    
+    <script type="text/javascript">
+    function getWorkId(){
+        var id = document.getElementById('getWorkId').value;
+        alert(id);
+    }
+</script>
     <!-- <script>
     $(document).ready(function() {
         $('#employeeGrid').dataTable();

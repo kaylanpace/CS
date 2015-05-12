@@ -17,13 +17,6 @@ public class SuppliesDao {
     // Injected database connection:
    @PersistenceContext private EntityManager em;
  
-    public void openTransaction(){
-    	em.getTransaction().begin();
-    }
-     public void commitTransaction(){
-    	 em.getTransaction().commit();
-    	// em.close();
-     }
     // Stores a new Supplies:
     public void persist(Supplies supplies) {
     		em.persist(supplies);
@@ -31,11 +24,23 @@ public class SuppliesDao {
   
 
     // Retrieves all the supplies:
-    public List<Supplies> getAllSupplies() {
-        TypedQuery<Supplies> query = em.createQuery(
-            "SELECT s FROM Supplies s ORDER BY s.Id", Supplies.class);
+    public List<Supplies[]> getAllSupplies() {
+        TypedQuery<Supplies[]> query = em.createQuery(
+            "SELECT s FROM Supplies s ORDER BY s.Id", Supplies[].class);
         return query.getResultList();
     }
     
+    // Retrieves all the supplies Ids:
+    public List<Supplies> getSupplyId() {
+        TypedQuery<Supplies> query = em.createQuery(
+            "SELECT si.Id FROM Supplies si ORDER BY si.Id", Supplies.class);
+        return query.getResultList();
+    }
+ // Retrieves all the supplies Ids:
+    public List<Supplies[]> getSupplyName() {
+        TypedQuery<Supplies[]> query = em.createQuery(
+            "SELECT sn.supplyName FROM Supplies sn ORDER BY sn.Id", Supplies[].class);
+        return query.getResultList();
+    }
     
 }

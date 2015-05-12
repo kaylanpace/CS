@@ -22,16 +22,12 @@ public class EmployeeDao {
     // Injected database connection:
    @PersistenceContext private EntityManager em;
  
-    public void openTransaction(){
-    	em.getTransaction().begin();
-    }
-     public void commitTransaction(){
-    	 em.getTransaction().commit();
-    	// em.close();
-     }
+   
     // Stores a new employee:
     public void persist(Employee employee) {
-    		em.persist(employee);
+    	//em.getTransaction().begin();
+    	  em.persist(employee);
+    	  //em.getTransaction().commit();
     }
   
   /*  public Employee setEmployeeWorkOrder(int empId, int workorderId) {

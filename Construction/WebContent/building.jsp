@@ -86,8 +86,8 @@
     									<script src="js/bootstrap.min.js"></script>
    										<script>
      									 $( "#dp" ).datepicker({
-										//changeMonth: true,
-										//changeYear: true
+										changeMonth: true,
+										changeYear: true
 										 });
     									</script>
 

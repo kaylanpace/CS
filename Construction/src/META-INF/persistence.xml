@@ -6,6 +6,15 @@
  
   <persistence-unit name="ConstructionPU" transaction-type="JTA">
     <provider>com.objectdb.jpa.Provider</provider>
+    <class>buiding.Building</class>
+    <class>employee.Employee</class>
+    <class>equipment.Equipment</class>
+    <class>items.Items</class>
+    <class>log.EmployeeLog</class>
+    <class>poc.POC</class>
+    <class>supplies.Supplies</class>
+    <class>uom.UOM</class>
+    <class>workorder.WorkOrder</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="$objectdb/db/constructionPal.odb"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>

@@ -40,7 +40,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+		<a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">

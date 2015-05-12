@@ -22,10 +22,10 @@ public class Items implements Serializable {
     private String itemName;
     
     @Column(name="assignedQty")
-    private double assignedQty;
+    private int assignedQty;
     
-    @Column(name="remainingQty")
-    private double remainingQty;
+    @Column(name="remainingQty", nullable=true)
+    private int remainingQty;
     
     @ManyToOne(fetch=FetchType.LAZY, optional=true)
     @JoinColumn(name="supplyId", nullable=true)
@@ -67,7 +67,7 @@ public class Items implements Serializable {
 		return assignedQty;
 	}
 
-	public void setAssignedQty(double assignedQty) {
+	public void setAssignedQty(int assignedQty) {
 		this.assignedQty = assignedQty;
 	}
 
@@ -75,14 +75,14 @@ public class Items implements Serializable {
 		return remainingQty;
 	}
 
-	public void setRemainingQty(double remainingQty) {
+	public void setRemainingQty(int remainingQty) {
 		this.remainingQty = remainingQty;
 	}
 
 	// String Representation:
     @Override
     public String toString() {
-        return  assignedQty + " " + remainingQty;
+        return  itemName + "" + assignedQty + " " + remainingQty;
     }
     
     

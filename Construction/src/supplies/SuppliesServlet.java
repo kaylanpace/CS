@@ -13,9 +13,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import workorder.*;
-import employee.*;
-
 @WebServlet(name = "SuppliesServlet", urlPatterns={"/supplies"})
 public class SuppliesServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
@@ -39,7 +36,6 @@ public class SuppliesServlet extends HttpServlet{
             throws ServletException, IOException {
  
         // Handle new supplies:
-    	SuppliesDao.openTransaction();
 		
 		String supplyName = request.getParameter("supplyName");
 		Double quantity = Double.parseDouble(request.getParameter("quantity"));
@@ -54,7 +50,7 @@ public class SuppliesServlet extends HttpServlet{
         e.printStackTrace();
         }
 		
-		String vendorPOC = request.getParameter("vendorPOC");
+		//String vendorPOC = request.getParameter("vendorPOC");
 		
 		String checkCyclestr = request.getParameter("checkCycle");
         Date checkcycle = null;
@@ -66,8 +62,8 @@ public class SuppliesServlet extends HttpServlet{
         }
 		
         if (supplyName != null){
-        	SuppliesDao.persist(new Supplies(supplyName, quantity, description, expirationDate, vendorPOC, checkcycle ));
-        	SuppliesDao.commitTransaction();
+        	SuppliesDao.persist(new Supplies(supplyName, quantity, description, expirationDate, checkcycle ));
+        	//SuppliesDao.commitTransaction();
         }
        
         

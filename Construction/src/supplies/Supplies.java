@@ -2,6 +2,7 @@ package supplies;
 
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.*;
 
 import poc.POC;
@@ -27,23 +28,22 @@ public class Supplies implements Serializable {
     @Column(name="description")
     private String description;
     
+    @Column(name="expirationDate")
     @Temporal(TemporalType.DATE)
     private Date expirationDate;
     
-    @Column
-    private String vendorPOC;
-    
+    @Column(name="checkCycle")
     @Temporal(TemporalType.DATE)
     private Date checkCycle;
     
     @OneToOne(optional=true)
     @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
-    public POC pocId;
+    private POC pocId;
     
-  //UOM one to one FK
+    //UOM one to one FK
   	@OneToOne(optional=true)
     @JoinColumn(name="uomId", unique=false, nullable=true, updatable=true)
-    public UOM uomId;
+    private UOM uomId;
     
     // Constructors:
     public Supplies() {
@@ -52,12 +52,12 @@ public class Supplies implements Serializable {
     
   
  
-    public Supplies(String supplyName, double quantity, String description, Date expirationDate, String vendorPOC, Date checkCycle) {
+    public Supplies(String supplyName, double quantity, String description, Date expirationDate, Date checkCycle) {
        this.supplyName = supplyName;
        this.quantity = quantity;
        this.description = description;
        this.expirationDate = expirationDate;
-       this.vendorPOC = vendorPOC;
+       
        this.checkCycle = checkCycle;
        
         
@@ -124,17 +124,6 @@ public class Supplies implements Serializable {
 
 
 
-	public String getVendorPOC() {
-		return vendorPOC;
-	}
-
-
-
-	public void setVendorPOC(String vendorPOC) {
-		this.vendorPOC = vendorPOC;
-	}
-
-
 
 	public Date getCheckCycle() {
 		return checkCycle;
@@ -161,6 +150,6 @@ public class Supplies implements Serializable {
     @Override
     public String toString() {
         return  supplyName + " " + quantity
-        		+ " " + description + " " + expirationDate + " " + vendorPOC + " " + checkCycle;
+        		+ " " + description + " " + expirationDate + " " + checkCycle;
     }
 }

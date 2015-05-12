@@ -13,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ConstructionPal - Add Work Order</title>
+    <title>ConstructionPal - CHECK</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +38,7 @@
  <% String username=request.getParameter("username"); 
  String password=request.getParameter("password"); 
  if((username.equals("admin") && password.equals("22"))) { 
- 	session.setAttribute("username",username); response.sendRedirect("admin-dashboard.jsp"); 
+ 	session.setAttribute("username",username); response.sendRedirect("/Construction/admin-dashboard"); 
  	} 
  	else response.sendRedirect("Error.jsp"); %> 
  	

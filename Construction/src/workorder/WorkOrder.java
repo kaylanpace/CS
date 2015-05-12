@@ -27,12 +27,12 @@ public class WorkOrder implements Serializable {
     @Column(name="status")
     private String status;
     
-    @OneToMany(mappedBy="worker")
-    private List<Employee> workers = new ArrayList<Employee>();
+    @OneToMany(mappedBy="workers")
+    private List<Employee> workers;
     
 	@OneToOne(optional=true)
     @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
-    public POC pocId;
+    private POC pocId;
     
 	// Constructors:
     public WorkOrder() {
