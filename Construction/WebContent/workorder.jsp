@@ -6,7 +6,7 @@
  
 <html>
     <head>
-    
+   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+   
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
@@ -33,6 +33,10 @@
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   
+    <!--  Date Picker -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
  
     <body>
 
@@ -41,7 +45,7 @@
 
         <!-- Page Heading/Breadcrumbs -->
        <a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
-                        
+                       
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Add Work Order</h1>
@@ -49,7 +53,7 @@
         </div>
         <!-- /.row -->
 
-        <!-- Content Row -->        
+        <!-- Content Row -->       
         <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -60,25 +64,48 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="workorder">
-                                       
+                                      
                                         <div class="form-group">
                                             <label>Description</label>
-                                            <input class="form-control" type="text" name="description" placeholder="" style="height: 93px; ">
+                                            <TextArea class="form-control" type="text" name="description" placeholder="" style="height: 93px; "></TextArea>
                                         </div>
                                         <div class="form-group">
                                             <label>Priority Level</label>
-                                            <input class="form-control" type="text" name="priorityLevel" placeholder="">
+                                            <select class="form-control" id = "theinput" type="text" onChange = "combo(this,'theinput’)" name="priorityLevel" placeholder="">
+                                            <option> </option>
+                                            <option>High</option>
+                                            <option>Low</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <input class="form-control" type="text" name="status" placeholder="">
+                                            <select class="form-control" id = "theinput" type="text" onChange ="combo(this,'theinput’)"  name="status" placeholder="">
+                                            <option></option>
+                                            <option>Started</option>
+                                            <option>Not Started</option>
+                                            <option>Cancelled</option>
+                                            <option>Finished</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for = "dp">Expected Finish</label>
+                                            <input class="form-control" type="date" id = "dp" name="expectedFinish" placeholder="Format: MM-dd-yyyy">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <TextArea class="form-control" type="text" name="description" placeholder="" style="height: 93px; "></TextArea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <TextArea class="form-control" type="text" name="comments" placeholder=""></TextArea>
                                         </div>
                                         <button type="submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>
                                 </div>
-                                
+                               
                             </div>
                             <!-- /.row (nested) -->
                         </div>
@@ -89,29 +116,38 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-            
+           
+<script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $( "#dp" ).datepicker({
+changeMonth: true,
 
+dateFormat: 'mm-dd-yy'
+});
+    </script>
             <table id="workorderGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                    	<!--  
+                    <!-- 
                         <th>Work Order ID</th>
                         <th>Building ID</th>
                         -->
                         <th>Description</th>
                         <th>Priority Level</th>
                         <th>Status</th>
+                        <th>Comments</th>
+                        <th>Expected Finish</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <!--  
+                        <!-- 
                         <th>Work Order ID</th>
                         <th>Building ID</th>
                         -->
-                        <th>Description</th>
-                        <th>Priority Level</th>
-                        <th>Status</th>
+                     
                     </tr>
                 </tfoot>
                     <%
@@ -121,16 +157,22 @@
                             for (WorkOrder workorder : workorders) {
                           %>
                       <tr>
-                            
+                           
                             <td>
                                     <%= workorder.getDescription() %>
                             </td>
-                            
+                           
                             <td>
                                     <%= workorder.getPriorityLevel() %>
                             </td>
                             <td>
                                     <%= workorder.getStatus() %>
+                            </td>
+                            <td>
+                                    <%= workorder.getComments() %>
+                            </td>
+                            <td>
+                                    <%= workorder.getExpectedFinish() %>
                             </td>
                       </tr>
                       <%
@@ -150,8 +192,8 @@
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>       
-        
+    <script src="js/bootstrap.min.js"></script>     
+       
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -174,6 +216,6 @@
         $('#workorderGrid').dataTable();
     } );
     </script>
-        
+       
     </body>
  </html>

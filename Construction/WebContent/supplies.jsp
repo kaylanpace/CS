@@ -6,7 +6,7 @@
  
 <html>
     <head>
-    
+   
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+   
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
@@ -34,7 +34,10 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
  
-    <body>    
+  <!--  Date Picker -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <body>   
 
     <!-- Page Content -->
     <div class="container">
@@ -47,7 +50,7 @@
         </div>
         <!-- /.row -->
 
-        <!-- Content Row -->       
+        <!-- Content Row -->     
         <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -66,36 +69,57 @@
                                             <label>Quantity</label>
                                             <input class="form-control" type="text" name="quantity" placeholder="Format: 30">
                                         </div>
-                                        
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <input class="form-control" type="text" name="description" placeholder="Description">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Expiration Date</label>
-                                            <input class="form-control" type="date" name="expirationDate" placeholder="Format: MM/dd/yyyy">
-                                        </div>
                                        
                                         <div class="form-group">
-                                            <label for="dp">Check Cycle</label>
-                                            <input class="form-control" type="date" name="checkCycle" placeholder="Format: MM/dd/yyyy">
-                                        </div> 
-                                        
+                                            <label>Description</label>
+                                            <TextArea class="form-control" type="text" name="description" placeholder="Description"></TextArea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for = "dp">Expiration Date</label>
+                                            <input class="form-control" type="date" id = "dp" name="expirationDate" placeholder="Format: MM-dd-yyyy">
+                                        </div>
+                                      
+                                        <div class="form-group">
+                                            <label for = "dp2">Check Cycle</label>
+                                            <input class="form-control" type="date" id = "dp2" name="checkCycle" placeholder="Format: MM-dd-yyyy">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vendor Name</label>
+                                            <input class="form-control" type="text" name="pocName" placeholder="Vendor Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vendor Phone</label>
+                                            <input class="form-control" type="text" name="pocPhone" placeholder="Vendor Phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Vendor Email</label>
+                                            <input class="form-control" type="text" name="pocEmail" placeholder="Vendor E-mail">
+                                        </div>
+                                       
+                                       
                                         <script src="js/jquery.min.js"></script>
-    									<script src="js/jquery-ui.min.js"></script>
-    									<script src="js/bootstrap.min.js"></script>
-   										 <script>
-     									 $( "#dp" ).datepicker({
-										changeMonth: true,
-										changeYear: true
-										 });
-    									</script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+      $( "#dp" ).datepicker({
+changeMonth: true,
+
+dateFormat: 'mm-dd-yy'
+});
+    </script>
+    <script>
+      $( "#dp2" ).datepicker({
+changeMonth: true,
+
+dateFormat: 'mm-dd-yy'
+});
+    </script>
                                         <button type="submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>
                                 </div>
-                                
+                               
                             </div>
                             <!-- /.row (nested) -->
                         </div>
@@ -106,9 +130,9 @@
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
-         
-            
-            
+        
+           
+           
             <table id="suppliesGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
@@ -117,15 +141,18 @@
                         <th>Description</th>
                         <th>Expiration Date</th>
                         <th>Check Cycle</th>
+                        <th>Vendor Name</th>
+                        <th>Vendor Phone</th>
+                        <th>Vendor E-mail</th>
                     </tr>
                 </thead>
-               
+              
                     <%
                       @SuppressWarnings("unchecked")
                       List<Supplies> suppliess = (List<Supplies>)request.getAttribute("supplies");
                        if (suppliess != null) {
                         for (Supplies supplies : suppliess) {
-                      
+                     
                       %>
                       <tr>
                         <td>
@@ -134,16 +161,25 @@
                         <td>
                             <%= supplies.getQuantity() %>
                         </td>
-                       
+                      
                         <td>
                             <%= supplies.getDescription() %>
                         </td>
                         <td>
                             <%= supplies.getExpirationDate() %>
                         </td>
-                        
+                       
                         <td>
                             <%= supplies.getCheckCycle() %>
+                        </td>
+                        <td>
+                            <%= supplies.getPocName() %>
+                        </td>
+                        <td>
+                            <%= supplies.getPocPhone() %>
+                        </td>
+                        <td>
+                            <%= supplies.getPocEmail() %>
                         </td>
                       </tr>
                       <%
@@ -163,8 +199,8 @@
     <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>       
-        
+    <script src="js/bootstrap.min.js"></script>     
+       
     <!-- jQuery -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -186,6 +222,6 @@
         $('#suppliesGrid').dataTable();
     } );
     </script>
-        
+       
     </body>
  </html>

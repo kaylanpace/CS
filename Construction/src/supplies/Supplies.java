@@ -12,144 +12,202 @@ import uom.UOM;
 @Entity
 @Table(name="Supplies")
 public class Supplies implements Serializable {
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 
-	// Persistent Fields:
-    @Id @GeneratedValue 
-    @Column(name="supplyId")
-    Long Id;
-    
-    @Column(name="supplyName")
-    private String supplyName;
-    
-    @Column(name="quantity")
-    private double quantity;
-    
-    @Column(name="description")
-    private String description;
-    
-    @Column(name="expirationDate")
-    @Temporal(TemporalType.DATE)
-    private Date expirationDate;
-    
-    @Column(name="checkCycle")
-    @Temporal(TemporalType.DATE)
-    private Date checkCycle;
-    
-    @OneToOne(optional=true)
-    @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
-    private POC pocId;
-    
-    //UOM one to one FK
-  	@OneToOne(optional=true)
-    @JoinColumn(name="uomId", unique=false, nullable=true, updatable=true)
-    private UOM uomId;
-    
-    // Constructors:
-    public Supplies() {
-    	
-    }
-    
-  
- 
-    public Supplies(String supplyName, double quantity, String description, Date expirationDate, Date checkCycle) {
-       this.supplyName = supplyName;
-       this.quantity = quantity;
-       this.description = description;
-       this.expirationDate = expirationDate;
-       
-       this.checkCycle = checkCycle;
-       
-        
-    }
-    
-    //Access Methods
-	public Long getId() {
-		return Id;
-	}
+// Persistent Fields:
+@Id @GeneratedValue 
+@Column(name="supplyId")
+Long Id;
+
+@Column(name="supplyName")
+private String supplyName;
+
+@Column(name="quantity")
+private double quantity;
+
+@Column(name="description")
+private String description;
+
+@Column(name="expirationDate")
+@Temporal(TemporalType.DATE)
+private Date expirationDate;
+
+@Column(name="checkCycle")
+@Temporal(TemporalType.DATE)
+private Date checkCycle;
 
 
 
-	public void setId(Long id) {
-		Id = id;
-	}
+@Column(name="pocName")
+private String pocName;
+
+@Column(name="pocPhone")
+private String pocPhone;
+
+@Column(name="pocEmail")
+private String pocEmail; 
+
+@OneToOne(optional=true)
+@JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
+private POC pocId;
+
+//UOM one to one FK
+@OneToOne(optional=true)
+@JoinColumn(name="uomId", unique=false, nullable=true, updatable=true)
+private UOM uomId;
+
+// Constructors:
+public Supplies() {
+
+}
 
 
 
-	public String getSupplyName() {
-		return supplyName;
-	}
+public Supplies(String supplyName, double quantity, String description, Date expirationDate, Date checkCycle) {
+this.supplyName = supplyName;
+this.quantity = quantity;
+this.description = description;
+this.expirationDate = expirationDate;
+
+this.checkCycle = checkCycle;
+
+
+}
+public Supplies(String supplyName, double quantity, String description, Date expirationDate, Date checkCycle, String pocName,String pocPhone,String pocEmail) {
+this.supplyName = supplyName;
+this.quantity = quantity;
+this.description = description;
+this.expirationDate = expirationDate;
+
+this.checkCycle = checkCycle;
+this.pocName = pocName;
+this.pocEmail = pocEmail;
+this.pocPhone = pocPhone;
+
+
+}
+
+//Access Methods
+public Long getId() {
+return Id;
+}
 
 
 
-	public void setSupplyName(String supplyName) {
-		this.supplyName = supplyName;
-	}
+public void setId(Long id) {
+Id = id;
+}
 
 
 
-	public double getQuantity() {
-		return quantity;
-	}
+public String getSupplyName() {
+return supplyName;
+}
 
 
 
-	public void setQuantity(double quantity) {
-		this.quantity = quantity;
-	}
+public void setSupplyName(String supplyName) {
+this.supplyName = supplyName;
+}
 
 
 
-	public String getDescription() {
-		return description;
-	}
+public double getQuantity() {
+return quantity;
+}
 
 
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+public void setQuantity(double quantity) {
+this.quantity = quantity;
+}
 
 
 
-	public Date getExpirationDate() {
-		return expirationDate;
-	}
+public String getDescription() {
+return description;
+}
 
 
 
-	public void setExpirationDate(Date expirationDate) {
-		this.expirationDate = expirationDate;
-	}
+public void setDescription(String description) {
+this.description = description;
+}
+
+
+
+public Date getExpirationDate() {
+return expirationDate;
+}
+
+
+
+public void setExpirationDate(Date expirationDate) {
+this.expirationDate = expirationDate;
+}
 
 
 
 
-	public Date getCheckCycle() {
-		return checkCycle;
-	}
+public Date getCheckCycle() {
+return checkCycle;
+}
 
 
 
-	public void setCheckCycle(Date checkCycle) {
-		this.checkCycle = checkCycle;
-	}
+public void setCheckCycle(Date checkCycle) {
+this.checkCycle = checkCycle;
+}
 
-	public POC getPocId() {
-		return pocId;
-	}
+public POC getPocId() {
+return pocId;
+}
 
 
 
-	public void setPocId(POC pocId) {
-		this.pocId = pocId;
-	}
+public void setPocId(POC pocId) {
+this.pocId = pocId;
+}
 
-	
-	// String Representation:
-    @Override
-    public String toString() {
-        return  supplyName + " " + quantity
-        		+ " " + description + " " + expirationDate + " " + checkCycle;
-    }
+
+public String getPocName() {
+return pocName;
+}
+
+
+
+public void setPocName(String pocName) {
+this.pocName = pocName;
+}
+
+
+
+public String getPocPhone() {
+return pocPhone;
+}
+
+
+
+public void setPocPhone(String pocPhone) {
+this.pocPhone = pocPhone;
+}
+
+
+
+public String getPocEmail() {
+return pocEmail;
+}
+
+
+
+public void setPocEmail(String pocEmail) {
+this.pocEmail = pocEmail;
+}
+
+// String Representation:
+@Override
+public String toString() {
+return supplyName + " " + quantity
++ " " + description + " " + expirationDate + " " + checkCycle;
+}
 }
