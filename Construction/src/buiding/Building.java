@@ -18,7 +18,7 @@ public class Building implements Serializable {
 	 
     // Persistent Fields:
     @Id @GeneratedValue 
-    @Column(name="buildingId")
+    @Column(name="Id")
     Long Id;
     
     @Column(name="buildingName")
@@ -42,11 +42,15 @@ public class Building implements Serializable {
 
 	@Column(name="zip")
 	private int zip;
-
-	//POC one to one FK
-	@OneToOne(optional=true)
-    @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
-    private POC pocId;
+	
+	@Column(name="pocName")
+	private String pocName;
+	
+	@Column(name="pocPhone")
+	private String pocPhone;
+	
+	@Column(name="pocEmail")
+	private String pocEmail;
 
     // Constructors:
     public Building() {
@@ -55,7 +59,8 @@ public class Building implements Serializable {
     
   
  
-    public Building(String buildingName, Date checkCycle, String street, String city, String state, int zip) {
+    public Building(String buildingName, Date checkCycle, String street, String city, String state, int zip, String pocName
+    		, String pocPhone, String pocEmail) {
        
         this.buildingName = buildingName;
         this.checkCycle = checkCycle;
@@ -63,8 +68,9 @@ public class Building implements Serializable {
         this.city = city;
         this.state = state;
         this.zip = zip;
-        
-        
+        this.pocName = pocName;
+        this.pocPhone = pocPhone;
+        this.pocEmail = pocEmail;
         
     }
     
@@ -78,9 +84,7 @@ public class Building implements Serializable {
 	public void setId(Long id) {
 		Id = id;
 	}
-
-
-
+	
 	public String getBuildingName() {
 		return buildingName;
 	}
@@ -163,11 +167,47 @@ public class Building implements Serializable {
 		this.zip = zip;
 	}
 
+	public String getPocName() {
+		return pocName;
+	}
+
+
+
+	public void setPocName(String pocName) {
+		this.pocName = pocName;
+	}
+
+
+
+	public String getPocPhone() {
+		return pocPhone;
+	}
+
+
+
+	public void setPocPhone(String pocPhone) {
+		this.pocPhone = pocPhone;
+	}
+
+
+
+	public String getPocEmail() {
+		return pocEmail;
+	}
+
+
+
+	public void setPocEmail(String pocEmail) {
+		this.pocEmail = pocEmail;
+	}
+
+
 	// String Representation:
     @Override
     public String toString() {
         return  buildingName + " " + checkCycle
-        		 + " " + street + " " + city + " " + state + " " + zip;
+        		 + " " + street + " " + city + " " + state + " " + zip + " " + pocName
+        		 + " " + pocPhone + " " + pocEmail;
     }
 
 }

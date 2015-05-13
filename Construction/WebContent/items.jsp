@@ -60,7 +60,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
-									<select name = "sName" style="width: 134px;">
+									<select name = "sName" style="width: 216px;">
 										<c:forEach 
 										items="${sName}" var="databaseValue">
 										<option selected = 'selected'> Me</option>

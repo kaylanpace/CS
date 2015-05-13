@@ -54,15 +54,17 @@ public class BuildingServlet extends HttpServlet{
         catch (ParseException e) {
         e.printStackTrace();
         }
-        
-        String poc = request.getParameter("POC");
+      
         String street = request.getParameter("street");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		int zip = Integer.parseInt(request.getParameter("zip"));
+		String pocName = request.getParameter("pocName");
+		String pocPhone = request.getParameter("pocPhone");
+		String pocEmail = request.getParameter("pocEmail");
 		
         if (buildingname != null){
-        	BuildingDao.persist(new Building(buildingname, checkcycle, street, city, state, zip));
+        	BuildingDao.persist(new Building(buildingname, checkcycle, street, city, state, zip, pocName, pocPhone, pocEmail));
         	BuildingDao.commitTransaction();
         }
        

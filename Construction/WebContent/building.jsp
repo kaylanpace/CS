@@ -7,6 +7,18 @@
 <html>
     <head>  
 
+	<style>
+	fieldset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border: px groove (internal value);
+}
+	</style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,37 +74,18 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="building">
-                                        <!--  
                                         <div class="form-group">
-                                            <label>Building ID</label>
-                                            <input class="form-control" type="number" name="Id" placeholder="Format: 12345">
-                                        </div>
-                                        -->
-                                        <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Building Name</label>
                                             <input class="form-control" type="text" name="buildingName" placeholder="Building name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Point of Contact</label>
-                                            <input class="form-control" type="text" name="POC" placeholder="Point of contact">
                                         </div>
                                         <div class="form-group">
                                             <label for="dp">Check Cycle</label>
                                             <input class="form-control" type="date" id="dp" name="checkCycle" placeholder="Format: MM/DD/YYYY ">
                                         </div> 
                                         
-                                        <script src="js/jquery.min.js"></script>
-    									<script src="js/jquery-ui.min.js"></script>
-    									<script src="js/bootstrap.min.js"></script>
-   										<script>
-     									 $( "#dp" ).datepicker({
-										changeMonth: true,
-										changeYear: true
-										 });
-    									</script>
-
-                                        
-                                        <div class="form-group">
+                                            
+                                          
+    								  <div class="form-group">
                                             <label>Street</label>
                                             <input class="form-control" type="text" name="street" placeholder="Street address">
                                         </div>
@@ -108,6 +101,35 @@
                                             <label>ZIP Code</label>
                                             <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
                                         </div>
+                                        
+                                        <div class="form-group">
+                                        <fieldset border="">
+                                            <legend>Point of Contact</legend>
+                                            <label for="pocName">Name</label>
+                                            <input class="form-control" type="number" name="pocName" placeholder="Format: 12345">
+                                        </fieldset>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>POC </label>
+                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ZIP Code</label>
+                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
+                                        </div> 
+                                         
+                                        <script src="js/jquery.min.js"></script>
+    									<script src="js/jquery-ui.min.js"></script>
+    									<script src="js/bootstrap.min.js"></script>
+   										<script>
+     									 $( "#dp" ).datepicker({
+										changeMonth: true,
+										changeYear: true
+										 });
+    									</script>
+
+                                        
+
                                         <button type="submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
@@ -137,17 +159,7 @@
 			            <th>Zip</th>
 			        </tr>
 			    </thead>
-			    <tfoot>
-			        <tr>
-			            <th>Building Name</th>
-			            <th>Check Cycle</th>
-			            <th>Point of Contact</th>
-			            <th>Street</th>
-			            <th>City</th>
-			            <th>State</th>
-			            <th>Zip</th>
-			        </tr>
-			    </tfoot>
+			   
 			        <%
 				      @SuppressWarnings("unchecked")
 				      List<Building> buildings = (List<Building>)request.getAttribute("buildings");
