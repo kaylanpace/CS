@@ -65,10 +65,7 @@
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="workorder">
                                       
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <TextArea class="form-control" type="text" name="description" placeholder="" style="height: 93px; "></TextArea>
-                                        </div>
+                                        
                                         <div class="form-group">
                                             <label>Priority Level</label>
                                             <select class="form-control" id = "theinput" type="text" onChange = "combo(this,'theinput’)" name="priorityLevel" placeholder="">
