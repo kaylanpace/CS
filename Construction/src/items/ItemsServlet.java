@@ -31,7 +31,7 @@ public class ItemsServlet extends HttpServlet{
         // Display the list of supplies:
     	request.setAttribute("supplies", SuppliesDao.getAllSupplies());
     	request.setAttribute("sList", SuppliesDao.getSupplyId());
-    	request.setAttribute("", SuppliesDao.getSupplyName());
+    	request.setAttribute("sName", SuppliesDao.getSupplyName());
        request.setAttribute("items", itemsDao.getAllItems());
       
         request.getRequestDispatcher("/items.jsp").forward(request, response);
@@ -52,7 +52,7 @@ public class ItemsServlet extends HttpServlet{
 		
 		
 		try {
-			selected = Long.parseLong(request.getParameter("sName"));
+			selected = Long.parseLong(request.getParameter("combobox"));
 		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

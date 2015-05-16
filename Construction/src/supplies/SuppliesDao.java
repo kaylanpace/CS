@@ -44,7 +44,7 @@ public class SuppliesDao {
     }
     public Supplies getSupplyByName(String sName){
     	TypedQuery<Supplies> query = em.createQuery(
-                "SELECT s FROM Supplies WHERE "+sName+"=s.supplyName", Supplies.class);
+                "SELECT s FROM Supplies WHERE "+sName+"= 's.supplyName'", Supplies.class);
     	return query.getSingleResult();
     }
     //delete by id

@@ -60,7 +60,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
-									<select name = "sName" value = "${databaseValue}" style="width: 216px;">
+									<select class="form-control"  name = "combobox" value = "${databaseValue}" style="width: 347px;">
 										<c:forEach 
 										items="${sList}" var="databaseValue">
 										<option  selected = 'selected'> Me</option>
