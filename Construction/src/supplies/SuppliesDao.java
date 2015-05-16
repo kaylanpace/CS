@@ -42,5 +42,16 @@ public class SuppliesDao {
             "SELECT sn.supplyName FROM Supplies sn ORDER BY sn.Id", Supplies[].class);
         return query.getResultList();
     }
+    public Supplies getSupplyByName(String sName){
+    	TypedQuery<Supplies> query = em.createQuery(
+                "SELECT s FROM Supplies WHERE "+sName+"=s.supplyName", Supplies.class);
+    	return query.getSingleResult();
+    }
+    //delete by id
+    public void removeSupply(long id){
+    	Supplies s = em.find(Supplies.class, id);
+    	em.remove(s);
+    }
+    
     
 }

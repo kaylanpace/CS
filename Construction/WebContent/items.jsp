@@ -60,39 +60,40 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
-									<select name = "sName" style="width: 216px;">
+									<select name = "sName" value = "${databaseValue}" style="width: 216px;">
 										<c:forEach 
-										items="${sName}" var="databaseValue">
-										<option selected = 'selected'> Me</option>
-											<option value= ${databaseValue}> ${databaseValue} </option> 
+										items="${sList}" var="databaseValue">
+										<option  selected = 'selected'> Me</option>
+											<option name = "selected" value= "${databaseValue}"> ${databaseValue} </option> 
                       					</c:forEach>
                       					<%-- <c:forEach 
 										items="${supplies}" var="databaseValue">
 											<option value= ${databaseValue.supplyName}> ${databaseValue} </option> 
                       					</c:forEach> --%>
                        </select>
+                       <button  name = "submit" value="delete" class="btn btn-default">delete</button>
                       
 									<div class="form-group">
                                             <label>Supply ID</label>
-                                            <input class="form-control" type="text" name="itemName" placeholder="Item Name">
+                                            <input class="form-control" type="text" name="itemName" value = "${id}"placeholder="Item Name">
                                         </div>
                                         <div class="form-group">
                                             <label>Item Name</label>
-                                            <input class="form-control" type="text" name="itemName" placeholder="Item Name">
+                                            <input class="form-control" type="text" name="itemName" value = '${name}' placeholder="Item Name">
                                         </div>
                                         
                                         <div class="form-group">
                                             <label>Assigned Qty</label>
-                                            <input class="form-control" type="number" name="assignedQty" placeholder="">
+                                            <input class="form-control" type="number" value = '0' name="assignedQty" placeholder="">
                                         </div>
                                        
                                         <div class="form-group">
                                             <label for="dp">Remaining Qty</label>
-                                            <input class="form-control" type="number" name="remainingQty" placeholder="">
+                                            <input class="form-control" type="number" value = '0' name="remainingQty" placeholder="">
                                         </div> 
                                         
                                         
-                                        <button type="submit" value="Add" class="btn btn-default">Submit</button>
+                                        <button type="submit" name = "submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>
@@ -141,6 +142,15 @@
                         
                         <td>
                             <%= item.getRemainingQty() %>
+                        </td>
+                        <td>
+                              ${selected} 
+                        </td>
+                        <td>
+                              ${id} 
+                        </td>
+                        <td>
+                              ${name} 
                         </td>
                       </tr>
                       <%
