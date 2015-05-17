@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import supplies.*;
-import supplies.Supplies;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +24,9 @@ public class ItemsServlet extends HttpServlet{
   //variables for a supply selection
   		public String description = "";
   		public String supplyName ="";
-  		public String supplyId = "";
-    
+  		public long supplyId = 0;
+  		
+        public long currentIdSelected=0;
     @Override
     public void doGet(
         HttpServletRequest request, HttpServletResponse response)
@@ -37,9 +37,10 @@ public class ItemsServlet extends HttpServlet{
     	request.setAttribute("sList", SuppliesDao.getSupplyId());
     	request.setAttribute("sName", SuppliesDao.getSupplyName());
        request.setAttribute("items", itemsDao.getAllItems());
-       
+       //set selected supply attributes
        request.setAttribute("description", this.description);
        request.setAttribute("supplyName", this.supplyName);
+       request.setAttribute("supplyId", this.supplyId);
        
         request.getRequestDispatcher("/items.jsp").forward(request, response);
         return;
@@ -51,7 +52,7 @@ public class ItemsServlet extends HttpServlet{
             throws ServletException, IOException {
  
         // Handle new supplies:
-    	long selected = 0;
+    	String selected = "";
 		String itemName = request.getParameter("itemName");
 		int assignedQty = Integer.parseInt(request.getParameter("assignedQty"));
 		int remainingQty = Integer.parseInt(request.getParameter("remainingQty"));
@@ -61,12 +62,11 @@ public class ItemsServlet extends HttpServlet{
 		
 		
 		//variables for a supply selection
-		String description = "";
-		String supplyName ="";
+		
 //		Long gridDelete = (long)0;
 //		gridDelete = Long.parseLong(request.getParameter("gridItemId"));
 		try {
-			selected = Long.parseLong(request.getParameter("combobox"));
+			selected = request.getParameter("combobox");
 			
 		    
 		} catch (NumberFormatException e1) {
@@ -88,18 +88,24 @@ public class ItemsServlet extends HttpServlet{
 		}
 		
 		else if (action.equalsIgnoreCase("delete")){
-			if(selected >0)
-				SuppliesDao.removeSupply(selected);
-			selected=0;
+			if(selected !="")
+				SuppliesDao.removeSupply(SuppliesDao.getSupplyByName(selected).getId());
+			selected="";
 			x=2;
 		}
 		else if (action.equalsIgnoreCase("select")){
-			if(selected >0)
+			if(selected !=""){
 				
-			this.description = SuppliesDao.getSingleSupply(selected).getDescription();
-			this.supplyName = SuppliesDao.getSingleSupply(selected).getSupplyName();
-			this.supplyId = SuppliesDao.getSingleSupply(selected).getId().toString();
-			selected=0;
+			try {
+				this.description = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getDescription();
+				this.supplyName = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getSupplyName();
+				this.supplyId = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getId();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			}
+			selected="";
 			x=4;
 		}
 		else if (action.equalsIgnoreCase("add")){

@@ -60,10 +60,10 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
-                                    <label>Supply ID</label>
+                                    <label>Supply Name</label>
 									<select class="form-control"  name = "combobox" value = "${databaseValue}" style="width: 347px;">
 										<c:forEach 
-										items="${sList}" var="databaseValue">
+										items="${sName}" var="databaseValue">
 										<option  selected = 'selected'> </option>
 											<option name = "selected" value= "${databaseValue}"> ${databaseValue} </option> 
                       					</c:forEach>
@@ -72,13 +72,13 @@
 											<option value= ${databaseValue.supplyName}> ${databaseValue} </option> 
                       					</c:forEach> --%>
                        </select>
-                       <button  name = "submit" value="delete" class="btn btn-default">delete</button>
+                       <button  name = "submit" value="delete" class="btn btn-default">Delete</button>
                        <button  name = "submit" value="select" class="btn btn-default">Select</button>
                        
                       
 									<div class="form-group">
-                                            <label>Supply Name</label>
-                                            <input class="form-control" type="text" name="itemName" value = "${supplyName}"placeholder="Item Name">
+                                            <label>Supply Id</label>
+                                            <input class="form-control" type="integer" name="SupplyId" value = "${supplyId}"placeholder="Supply Id">
                                         </div>
                                         <div class="form-group">
                                             <label>Item Name</label>
