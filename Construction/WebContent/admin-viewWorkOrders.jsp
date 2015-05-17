@@ -136,10 +136,10 @@ function getTdValue() {
                             <a href="#"><i class="fa fa-user fa-fw"></i> Employees<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="employee.html">View Employees</a>
+                                    <a href="/Construction/viewAllEmployees.jsp">View Employees</a>
                                 </li>
                                 <li>
-								   <a href="/Construction/employee">Create New Employees</a>
+								   <a href="/Construction/employee.jsp">Create New Employees</a>
                                 </li>
                                
 							

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import workorder.WorkOrderDao;
  
-@WebServlet(name="EmployeeServlet", urlPatterns={"/employee"})
+@WebServlet(name="EmployeeServlet", urlPatterns={"/employee", "/viewAllEmployees"})
 public class EmployeeServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
  
@@ -29,7 +29,12 @@ public class EmployeeServlet extends HttpServlet {
         // Display the list of employees:
         request.setAttribute("employees", employeeDao.getEmployees());
         request.setAttribute("workorders", workorderDao.getWorkOrders());
+       
+        
+        request.getRequestDispatcher("/viewAllEmployees.jsp").forward(request, response);
+       
         request.getRequestDispatcher("/employee.jsp").forward(request, response);
+        
     }
  
     @Override
@@ -37,23 +42,43 @@ public class EmployeeServlet extends HttpServlet {
     		
         HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	//employeeDao.openTransaction();
-        // Handle a new employee:
-        String firstName = request.getParameter("empFirstName");
-        String lastName = request.getParameter("empLastName");
-        int ssn = Integer.parseInt(request.getParameter("ssn"));
-        String position = request.getParameter("position");
-        int age = Integer.parseInt(request.getParameter("age"));
-        boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
-        String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
+    	
+    	//gets button "value" from the buttons named "submit"
+    	String action = request.getParameter("submit");
         
-      
-        if (firstName != null)
+    	
         
+    	// Handle a new employee:
+        if (action.equalsIgnoreCase("Add"))
         {
-            employeeDao.persist(new Employee(firstName, lastName, ssn, position, age, isAdmin, userName, password));
-           // employeeDao.commitTransaction();
+        	String firstName = request.getParameter("empFirstName");
+            String lastName = request.getParameter("empLastName");
+            
+            String position = request.getParameter("position");
+            int age = Integer.parseInt(request.getParameter("age"));
+            boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
+            String userName = request.getParameter("userName");
+            String password = request.getParameter("password");
+            
+            employeeDao.persist(new Employee(firstName, lastName, position, age, isAdmin, userName, password));
+           
+            System.out.print("add was pushed");
+        }
+      //handle update of employee
+        else if (action.equalsIgnoreCase("deleteRow")){
+        	Long employeeId = Long.parseLong(request.getParameter("employeeId"));
+            String updatefirstName = request.getParameter("employeeFirstName");
+            String updatelastName = request.getParameter("employeeLastName");
+            String updateposition = request.getParameter("employeePosition");
+            int updateage = Integer.parseInt(request.getParameter("employeeAge"));
+            
+            try {
+				employeeDao.removeEmployee(employeeId);
+			} catch (Exception e) {}
+        	System.out.print("delete row was pushed, id = "+employeeId);
+        }
+        else if(action.equalsIgnoreCase("updateRow")){
+        	
         }
  
         // Display the list of employees:

@@ -22,8 +22,6 @@ public class Employee implements Serializable {
     @Column(name="empLastName")
     private String empLastName;
     
-    //@Column(name="ssn", unique=true)
-    private int ssn;
     
     //@Column(name="position")
     private String position;
@@ -57,11 +55,10 @@ public class Employee implements Serializable {
     
   
  
-    public Employee(String empFirstName, String empLastName, int ssn, String position, int age, boolean isAdmin, String userName, String password) {
+    public Employee(String empFirstName, String empLastName,  String position, int age, boolean isAdmin, String userName, String password) {
        
         this.empFirstName = empFirstName;
         this.empLastName = empLastName;
-        this.ssn = ssn;
         this.position = position;
         this.age = age;
         this.isAdmin = isAdmin;
@@ -107,15 +104,7 @@ public class Employee implements Serializable {
 
 
 
-	public int getSsn() {
-		return ssn;
-	}
-
-
-
-	public void setSsn(int ssn) {
-		this.ssn = ssn;
-	}
+	
 
 
 
@@ -188,7 +177,7 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return  empFirstName + " " + empLastName
-        		+ " " + ssn + " " + position + " " + age + " " + isAdmin + 
+        		+ " " + position + " " + age + " " + isAdmin + 
         		" " + userName + " " + password;
     }
 }

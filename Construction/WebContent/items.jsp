@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="java.util.*,items.Items"%>
+<%@page import="java.util.*,items.Items,employee.Employee"%>
 <%@page import="java.util.*,supplies.Supplies"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -267,7 +267,15 @@
                        }
                       %>
             </table>
-		
+		<hr><ol> <%
+            @SuppressWarnings("unchecked") 
+            List<Employee> employees = (List<Employee>)request.getAttribute("employees");
+            if (employees != null) {
+                for (Employee employee : employees) { %>
+                    <li> <%= employee %> </li> <%
+                }
+            } %>
+        </ol><hr>
         <hr>
 
     </div>

@@ -37,7 +37,14 @@ public class EmployeeDao {
         emp.setWorkOrder(work);
         return emp;
       }*/
-
+    public Employee getEmployeeById(long id){
+    	Employee e = em.find(Employee.class, id);
+    	return e;
+    }
+    public void removeEmployee(long id){
+    	Employee e = em.find(Employee.class, id);
+    	em.remove(e);
+    }
  
     // Retrieves all the employee:
     public List<Employee> getEmployees() {
