@@ -47,6 +47,10 @@ public class SuppliesDao {
                 "SELECT s FROM Supplies WHERE "+sName+"= 's.supplyName'", Supplies.class);
     	return query.getSingleResult();
     }
+    public Supplies getSingleSupply(long id){
+    	Supplies s = em.find(Supplies.class, id);
+    	return s;
+    }
     //delete by id
     public void removeSupply(long id){
     	Supplies s = em.find(Supplies.class, id);

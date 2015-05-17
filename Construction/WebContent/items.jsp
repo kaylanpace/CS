@@ -60,10 +60,11 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
+                                    <label>Supply ID</label>
 									<select class="form-control"  name = "combobox" value = "${databaseValue}" style="width: 347px;">
 										<c:forEach 
 										items="${sList}" var="databaseValue">
-										<option  selected = 'selected'> Me</option>
+										<option  selected = 'selected'> </option>
 											<option name = "selected" value= "${databaseValue}"> ${databaseValue} </option> 
                       					</c:forEach>
                       					<%-- <c:forEach 
@@ -72,14 +73,16 @@
                       					</c:forEach> --%>
                        </select>
                        <button  name = "submit" value="delete" class="btn btn-default">delete</button>
+                       <button  name = "submit" value="select" class="btn btn-default">Select</button>
+                       
                       
 									<div class="form-group">
-                                            <label>Supply ID</label>
-                                            <input class="form-control" type="text" name="itemName" value = "${id}"placeholder="Item Name">
+                                            <label>Supply Name</label>
+                                            <input class="form-control" type="text" name="itemName" value = "${supplyName}"placeholder="Item Name">
                                         </div>
                                         <div class="form-group">
                                             <label>Item Name</label>
-                                            <input class="form-control" type="text" name="itemName" value = '${name}' placeholder="Item Name">
+                                            <input class="form-control" type="text" name="itemName" value = '${supplyName}' placeholder="Item Name">
                                         </div>
                                         
                                         <div class="form-group">
@@ -97,12 +100,16 @@
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>
+                                    
                                 </div>
                                 
                             </div>
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
+                        
+                        
+                        
                     </div>
                     <!-- /.panel -->
                 </div>
@@ -207,7 +214,60 @@
                       %>
             </table>
             
+            
 
+
+            <table id="itemsGrid" name = "grid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    	<th>Item Id</th>
+                        <th>Item Name</th>
+                        <th>Assigned Quantity</th>
+                        <th>Remaining Quantity</th>
+                    </tr>
+                </thead>
+               
+                    <%
+                      @SuppressWarnings("unchecked")
+                      List<Items> tems = (List<Items>)request.getAttribute("tems");
+                       if (items != null) {
+                        for (Items item : items) {
+                      
+                      %>
+                      
+                      <tr>
+                      
+                        <td>
+                             <input class="form-control" type="number" name="gridItemId" value = <%= item.getId() %> readonly>
+                        </td>
+                        <td>
+                        	<input class="form-control" type="text" name="gridItemName" value = "<%= item.getItemName() %>  " placeholder="Item Name">
+                        </td>
+                        <td>
+                            <input class="form-control" type="int" value = "<%=item.getAssignedQty()%>  " name="assignedQ" placeholder="">
+                        </td>
+                        
+                        <td>
+                            <input class="form-control" type="int" value = "<%=item.getRemainingQty()%>  " name="remainingQ" placeholder="">
+                        </td>
+                        <td>
+                              update 
+                        </td>
+                        <td>
+                             <button   name = "submit" value = 'deleteRow'  class="btn btn-default">delete</button>
+                        </td>
+                        
+                      </tr>
+                     
+                      <%
+                       }
+                      %>
+                      
+                      <%
+                       }
+                      %>
+            </table>
+		
         <hr>
 
     </div>

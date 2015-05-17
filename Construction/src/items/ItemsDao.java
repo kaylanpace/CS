@@ -26,5 +26,9 @@ public class ItemsDao {
         return query.getResultList();
     }
     
+    public void removeItem(long id){
+    	Items i = em.find(Items.class, id);
+    	em.remove(i);
+    }
     
 }
