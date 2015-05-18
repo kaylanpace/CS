@@ -78,6 +78,22 @@ public class EmployeeServlet extends HttpServlet {
         	System.out.print("delete row was pushed, id = "+employeeId);
         }
         else if(action.equalsIgnoreCase("updateRow")){
+        	Long employeeId = Long.parseLong(request.getParameter("employeeId"));
+        	String updatefirstName = request.getParameter("employeeFirstName");
+        	String updatelastName = request.getParameter("employeeLastName");
+        	String updateposition = request.getParameter("employeePosition");
+        	int updateage = Integer.parseInt(request.getParameter("employeeAge"));
+            try {
+            	
+            	employeeDao.updateFirstName(employeeId,updatefirstName);
+            	employeeDao.updateLastName(employeeId,updatelastName);
+            	employeeDao.updatePosition(employeeId, updateposition);
+            	employeeDao.updateAge(employeeId, updateage);
+			    System.out.print("made it past the update methods");
+			 
+		    } catch (Exception e) {}
+    	    System.out.print("update row was pushed, id = "+employeeId);
+        	
         	
         }
  

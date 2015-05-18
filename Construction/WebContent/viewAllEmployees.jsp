@@ -83,26 +83,26 @@
                       <tr>
                       
                         <td>
-                             <input class="form-control" type="number" name="employeeId" value = <%= emps.getEmpId() %> readonly>
+                             <input class="form-control" type="long" name="employeeId" value = <%= emps.getEmpId() %> readonly>
                         </td>
                         <td>
-                        	<input class="form-control" type="text" name="employeeFirstName" value = "<%= emps.getEmpFirstName()%>  " placeholder="Item Name">
+                        	<input class="form-control" type="text" name="employeeFirstName" value = "<%= emps.getEmpFirstName()%>" placeholder="Item Name">
                         </td>
                         <td>
-                        	<input class="form-control" type="text" name="employeeLastName" value = "<%= emps.getEmpLastName()%>  " placeholder="Item Name">
+                        	<input class="form-control" type="text" name="employeeLastName" value = "<%=emps.getEmpLastName()%>" placeholder="Item Name">
                         </td>
                         <td>
-                            <input class="form-control" type="int"name="employeeAge" value = "<%=emps.getAge()%>"  placeholder="">
+                            <input class="form-control" type="integer"name="employeeAge" value = <%=emps.getAge()%>   placeholder="">
                         </td>
                         
                         <td>
-                            <input class="form-control" type="int" name="employeePosition" value = "<%=emps.getPosition()%>"  placeholder="">
+                            <input class="form-control" type="text" name="employeePosition" value = "<%= emps.getPosition()%>"  placeholder="">
                         </td>
                         <td>
-                              update 
+                              <button   name = "submit" value = "updateRow"  class="btn btn-default">Update</button> 
                         </td>
                         <td>
-                             <button   name = "submit" value = "deleteRow"  class="btn btn-default">delete</button>
+                             <button   name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>
                         </td>
                         
                       </tr>
