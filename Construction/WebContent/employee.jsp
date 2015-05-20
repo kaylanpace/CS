@@ -40,7 +40,8 @@
 
     <!-- Page Content -->
     <div class="container">
-		<a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
+		<a href="/Construction/admin-viewWorkOrders.jsp" > Back to DashBoard</a><br>
+		<!-- <a href="/Construction/viewAllEmployees.jsp" > View All Employees</a> -->
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">

@@ -41,21 +41,26 @@ public class EmployeeDao {
     	TypedQuery query = em.createQuery(
                 "UPDATE Employee SET empFirstName = '"+fn+"' WHERE Id = "+id+"", Employee.class);
            query.executeUpdate();
+           
     }
     public void updateLastName(long id, String ln){
     	TypedQuery query = em.createQuery(
                 "UPDATE Employee SET empLastName = '"+ln+"' WHERE Id = "+id+"", Employee.class);
            query.executeUpdate();
+           
+           
     }
     public void updateAge(long id, int age){
     	TypedQuery query = em.createQuery(
                 "UPDATE Employee SET age = "+age+" WHERE Id = "+id+"", Employee.class);
            query.executeUpdate();
+           
     }
-    public void updatePosition(long id, String position){
+    public void updatePosition(Long id, String position){
     	TypedQuery query = em.createQuery(
                 "UPDATE Employee SET position = '"+position+"' WHERE Id = "+id+"", Employee.class);
-           query.executeUpdate();
+    	    query.executeUpdate();
+          
     }
            
 //        TypedQuery query2 = em.createQuery(

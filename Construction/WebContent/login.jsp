@@ -37,13 +37,13 @@
     <body>
 <center> 
   	<h1>Login</h1> 
-  	<form action="LoginCheck" method="post">
-  	 <br/>Username:<input type="text" class="form-control" name="username" style="width: 30%;"> 
+  	<form  method="POST">
+  	 <br/>Username:<input type="text" class="form-control" name="username" style="width: 236px;"> 
   	 <br>
-  	  Password:<input type="password" class="form-control" name="password" style="width: 30%;"> 
+  	  Password:<input type="password" class="form-control" name="password"  style="width: 236px;" > 
   	 <br>
-  	 <input type="submit"  value="Submit" > 
-  	 <!-- onclick="document.location.href='/Construction/admin-viewWorkOrders'" -->
+  	 <button  name = "submit"  value="login" class="btn btn-default">Login</button> 
+  	 
   	 </form> 
   	 </center> 
     </body>

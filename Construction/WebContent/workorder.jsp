@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*,workorder.WorkOrder"%>
+<%@page import="java.util.*,employee.Employee"%>
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,7 +45,8 @@
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
-       <a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
+        <a href="/Construction/admin-viewWorkOrders.jsp" > Back to Dashboard</a><br>
+       <!-- <a href="/Construction/viewAllWorkorders.jsp" > Back to all Work-Orders</a> -->
                        
         <div class="row">
             <div class="col-lg-12">
@@ -70,16 +72,16 @@
                                             <label>Priority Level</label>
                                             <select class="form-control" id = "theinput" type="text" onChange = "combo(this,'theinput’)" name="priorityLevel" placeholder="">
                                             <option> </option>
-                                            <option>High</option>
                                             <option>Low</option>
+                                            <option>High</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
                                             <select class="form-control" id = "theinput" type="text" onChange ="combo(this,'theinput’)"  name="status" placeholder="">
                                             <option></option>
-                                            <option>Started</option>
                                             <option>Not Started</option>
+                                            <option>Started</option>
                                             <option>Cancelled</option>
                                             <option>Finished</option>
                                             </select>
@@ -93,11 +95,17 @@
                                             <label>Description</label>
                                             <TextArea class="form-control" type="text" name="description" placeholder="" style="height: 93px; "></TextArea>
                                         </div>
+                        
                                         <div class="form-group">
                                             <label>Comments</label>
                                             <TextArea class="form-control" type="text" name="comments" placeholder=""></TextArea>
                                         </div>
-                                        <button type="submit" value="Add" class="btn btn-default">Submit</button>
+                                        
+                                         
+                        	
+                        </td>
+                                        </div>
+                                        <button type="submit" name = "submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>

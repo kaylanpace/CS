@@ -45,7 +45,8 @@ public class EmployeeServlet extends HttpServlet {
     	
     	//gets button "value" from the buttons named "submit"
     	String action = request.getParameter("submit");
-        
+    	
+ 
     	
         
     	// Handle a new employee:
@@ -78,25 +79,24 @@ public class EmployeeServlet extends HttpServlet {
         	System.out.print("delete row was pushed, id = "+employeeId);
         }
         else if(action.equalsIgnoreCase("updateRow")){
+        	String updateposition = request.getParameter("employeePosition");
         	Long employeeId = Long.parseLong(request.getParameter("employeeId"));
         	String updatefirstName = request.getParameter("employeeFirstName");
-        	String updatelastName = request.getParameter("employeeLastName");
-        	String updateposition = request.getParameter("employeePosition");
-        	int updateage = Integer.parseInt(request.getParameter("employeeAge"));
+        	String updateLastName = request.getParameter("employeeLastName");
+        	int updateAge = Integer.parseInt(request.getParameter("employeeAge"));
+        	
             try {
             	
             	employeeDao.updateFirstName(employeeId,updatefirstName);
-            	employeeDao.updateLastName(employeeId,updatelastName);
+            	employeeDao.updateLastName(employeeId,updateLastName);
+            	employeeDao.updateAge(employeeId, updateAge);
             	employeeDao.updatePosition(employeeId, updateposition);
-            	employeeDao.updateAge(employeeId, updateage);
+            	
 			    System.out.print("made it past the update methods");
-			 
 		    } catch (Exception e) {}
     	    System.out.print("update row was pushed, id = "+employeeId);
-        	
-        	
         }
- 
+         
         // Display the list of employees:
         doGet(request, response);
     }

@@ -23,10 +23,10 @@ public class Employee implements Serializable {
     private String empLastName;
     
     
-    //@Column(name="position")
+    @Column(name="position")
     private String position;
    
-    //@Column(name="age")
+    @Column(name="age")
     private int age;
     
     //@Column(name="isAdmin")

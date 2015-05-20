@@ -55,7 +55,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="dashboard.html">ConstructionPal</a>
+                <a class="navbar-brand" href="/Construction/admin-dashboard.jsp">ConstructionPal</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -83,16 +83,16 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="admin-dashboard.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="/Construction/admin-dashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-user fa-fw"></i> Employees<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="admin-viewEmployees.html">View Employees</a>
+                                    <a href="/Construction/viewAllEmployees.jsp">View Employees</a>
                                 </li>
                                 <li>
-                                    <a href="admin-addEmployees.html">Create New Employees</a>
+								   <a href="/Construction/employee.jsp">Create New Employees</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -100,11 +100,13 @@
                         <li>
                             <a href="#"><i class="fa fa-list-alt fa-fw"></i> Work Orders<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                               
                                 <li>
-                                    <a href="admin-viewWorkOrders.html">View Work Orders</a>
+                                    <a href="/Construction/workorder.jsp">Create New Work Order</a>
+                                   
                                 </li>
                                 <li>
-                                    <a href="admin-addWorkOrders.html">Create New Work Order</a>
+                                	 <a href="/Construction/viewAllWorkorders.jsp">View Work-Orders</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -163,9 +165,9 @@
                         
                     </div>
                     <!-- /.col-lg-12 -->
-                    <button type="button"onclick="document.location.href='/Construction/admin-viewWorkOrders'" class="btn btn-outline btn-primary btn-lg" style="width: 136px; ">Work Orders</button>
-                        <a href="admin-addWorkOrders.html">  <button type="button"onclick="document.location.href='employee.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 138px; ">Employees</button></a>
-                        <button type="button"onclick="document.location.href='?.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 141px; ">  Supplies </button>
+                    <button type="button"onclick="document.location.href='/Construction/admin-viewWorkOrders.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 136px; ">Work Orders</button>
+                        <a href="admin-addWorkOrders.html">  <button type="button"onclick="document.location.href='admin-viewEmployees.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 138px; ">Employees</button></a>
+                        <button type="button"onclick="document.location.href='supplies.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 141px; ">  Supplies </button>
                 </div>
                 <!-- /.row -->
                 

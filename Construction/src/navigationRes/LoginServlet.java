@@ -16,7 +16,7 @@ import employee.EmployeeDao;
 /**
  * Servlet implementation class NavigationServlet
  */
-@WebServlet(name="/LoginServlet" , urlPatterns={"/admin-dashboard"})
+@WebServlet(name="LoginServlet" , urlPatterns={"/login"})
 public class LoginServlet extends HttpServlet {
 	public class EmployeeServlet extends HttpServlet {
 		  private static final long serialVersionUID = 1L;
@@ -35,7 +35,9 @@ public class LoginServlet extends HttpServlet {
 		   /*     // Display the list of employees:
 		        request.setAttribute("employees", employeeDao.getEmployees());
 		        request.setAttribute("workorders", workorderDao.getWorkOrders());*/
+		    	request.getRequestDispatcher("/login.jsp").forward(request, response);
 		        request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
+		        
 		    }
 		 
 		    @Override
@@ -43,25 +45,18 @@ public class LoginServlet extends HttpServlet {
 		    		
 		        HttpServletRequest request, HttpServletResponse response)
 		            throws ServletException, IOException {
-		    	/*//employeeDao.openTransaction();
-		        // Handle a new employee:
-		        String firstName = request.getParameter("empFirstName");
-		        String lastName = request.getParameter("empLastName");
-		        int ssn = Integer.parseInt(request.getParameter("ssn"));
-		        String position = request.getParameter("position");
-		        int age = Integer.parseInt(request.getParameter("age"));
-		        boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
-		        String userName = request.getParameter("userName");
-		        String password = request.getParameter("password");
-		        
-		      
-		        if (firstName != null)
-		        
-		        {
-		            employeeDao.persist(new Employee(firstName, lastName, ssn, position, age, isAdmin, userName, password));
-		           // employeeDao.commitTransaction();
+		    
+		
+		    	String action = request.getParameter("submit");
+		    	System.out.print("the servlet dopost ran, ");
+		    	if(action.equalsIgnoreCase("login")){
+		        	System.out.print("login was pushed, ");
+		        	String username = request.getParameter("username");
+		        	String password = request.getParameter("password");
+		        	
+		        	//successful admin login redirect
+		        	// response.sendRedirect("admin-dashboard.jsp"); 
 		        }
-		 */
 		        // Display the list of employees:
 		        doGet(request, response);
 		    }

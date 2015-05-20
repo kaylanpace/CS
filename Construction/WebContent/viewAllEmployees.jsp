@@ -40,7 +40,7 @@
 
     <!-- Page Content -->
     <div class="container">
-		<a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a><br>
+		<a href="/Construction/admin-dashboard.jsp" > Back to Dashboard</a><br>
 		<a href="/Construction/employee.jsp" > Add a new Employee</a>
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
@@ -65,10 +65,10 @@
                 <thead>
                     <tr>
                     	<th>Employee Id</th>
-                        <th>Employee First Name</th>
-                        <th>Employee Last Name</th>
-                        <th>Age</th>
-                        <th>Position</th>
+                        <th style="width: 155px; ">Employee First Name</th>
+                        <th style="width: 155px; ">Employee Last Name</th>
+                        <th style="width: 155px; ">Position</th>
+                        <th style="width: 155px; ">Age</th>
                     </tr>
                 </thead>
                
@@ -79,34 +79,40 @@
                         for (Employee emps : employees) {
                       
                       %>
-                      <form method="post">
-                      <tr>
                       
+                      <tr>
+                      <form method="POST">
                         <td>
                              <input class="form-control" type="long" name="employeeId" value = <%= emps.getEmpId() %> readonly>
                         </td>
                         <td>
-                        	<input class="form-control" type="text" name="employeeFirstName" value = "<%= emps.getEmpFirstName()%>" placeholder="Item Name">
+                        	<input class="form-control" type="text" name="employeeFirstName" value = "<%=emps.getEmpFirstName()%>" placeholder="First Name">
                         </td>
                         <td>
-                        	<input class="form-control" type="text" name="employeeLastName" value = "<%=emps.getEmpLastName()%>" placeholder="Item Name">
+                        	<input class="form-control" type="text" name="employeeLastName" value = "<%=emps.getEmpLastName()%>" placeholder="Last Name">
                         </td>
                         <td>
-                            <input class="form-control" type="integer"name="employeeAge" value = <%=emps.getAge()%>   placeholder="">
+                        <select class= "form-control" name = "employeePosition" type = "text" value = "<%=emps.getPosition()%>">
+                        					<option value = "<%=emps.getPosition()%>"><%=emps.getPosition()%></option>
+											<option value ="Worker">Worker</option>
+											<option value ="Supervisor">Supervisor</option>
+											<option value ="Administrator">Administrator</option>
+ <!-- ? -->				</select>
+						 </td>
+                        <td>
+                            <input class="form-control" type="integer" name="employeeAge" value = <%= emps.getAge() %>   placeholder="">
                         </td>
                         
-                        <td>
-                            <input class="form-control" type="text" name="employeePosition" value = "<%= emps.getPosition()%>"  placeholder="">
-                        </td>
+                        
                         <td>
                               <button   name = "submit" value = "updateRow"  class="btn btn-default">Update</button> 
                         </td>
                         <td>
                              <button   name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>
                         </td>
-                        
+                        </form>
                       </tr>
-                      </form>
+                      
                      
                       <%
                        }

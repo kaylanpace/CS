@@ -60,6 +60,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <form role="form" method="POST" action="items" style="width: 630px; ">
+                                   
                                     <label>Supply Name</label>
 									<select class="form-control"  name = "combobox" value = "${databaseValue}" style="width: 347px;">
 										<c:forEach 
@@ -74,6 +75,7 @@
                        </select>
                        <button  name = "submit" value="delete" class="btn btn-default">Delete</button>
                        <button  name = "submit" value="select" class="btn btn-default">Select</button>
+                       
                        
                       
 									<div class="form-group">
