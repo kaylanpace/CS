@@ -4,15 +4,20 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.*;
+
 import poc.POC;
+import supplies.Supplies;
 import employee.Employee;
+
+import javax.ejb.EJB;
 
 @Entity
 @Table(name="WorkOrder")
 public class WorkOrder implements Serializable {
 private static final long serialVersionUID = 1L;
-
+@EJB Employee employeeDao;
 // Persistent Fields:
 @Id @GeneratedValue
 @Column(name="workorderId")
@@ -27,7 +32,7 @@ private String priorityLevel;
 @Column(name="status")
 private String status;
 
-@OneToMany(mappedBy="workers")
+//@OneToMany(mappedBy="workers")
 private List<Employee> workers;
 
 @OneToOne(optional=true)
@@ -46,7 +51,26 @@ private Date expectedFinish;
 @Temporal(TemporalType.DATE)
 private Date finishDate;
 
-public String getLaborSummary() {
+@Column(name = "supplies")
+private List<Long> supplies;
+
+
+public List<Long> getSupplies() {
+	return supplies;
+}
+
+public void setSupplies(List<Long> supplies) {
+	this.supplies = supplies;
+}
+
+public void addSupply(Long sid){
+	this.supplies.add(sid);
+}
+public void removeSupply(Supplies s){
+	supplies.remove(s);
+}
+
+String getLaborSummary() {
 return laborSummary;
 }
 
@@ -122,6 +146,13 @@ return workers;
 
 public void setWorkers(List<Employee> workers) {
 this.workers = workers;
+}
+
+public void addWorker(Employee e){
+	workers.add(e);
+}
+public void removeWorker(long i){
+	workers.remove(i);
 }
 
 public POC getPocId() {

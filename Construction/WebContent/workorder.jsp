@@ -2,6 +2,16 @@
 <%@page import="java.util.*,workorder.WorkOrder"%>
 <%@page import="java.util.*,employee.Employee"%>
  
+<%--  <%@page import="javax.ejb.EJB" %>
+<%@page import ="javax.servlet.*"%>
+<%@page import ="javax.servlet.annotation.WebServlet"%>
+<%@page import ="javax.servlet.http.HttpServlet"%>
+<%@page import ="javax.servlet.http.HttpServletRequest"%>
+<%@page import ="javax.servlet.http.HttpServletResponse"%>
+<%
+String servletParam = "workorder" ;
+request.setParameter("servletParam",servletParam);
+%> --%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
  
@@ -155,39 +165,65 @@ dateFormat: 'mm-dd-yy'
                      
                     </tr>
                 </tfoot>
-                    <%
+
+                      <%
                           @SuppressWarnings("unchecked")
-                          List<WorkOrder> workorders = (List<WorkOrder>)request.getAttribute("workorders");
+                          List<WorkOrder> workorders =   (List<WorkOrder>)request.getAttribute("workorders") ; 
                            if (workorders != null) {
                             for (WorkOrder workorder : workorders) {
                           %>
+                      
                       <tr>
-                           
-                            <td>
-                                    <%= workorder.getDescription() %>
-                            </td>
-                           
-                            <td>
-                                    <%= workorder.getPriorityLevel() %>
-                            </td>
-                            <td>
-                                    <%= workorder.getStatus() %>
-                            </td>
-                            <td>
-                                    <%= workorder.getComments() %>
-                            </td>
-                            <td>
-                                    <%= workorder.getExpectedFinish() %>
-                            </td>
+                      <form method="POST">
+                        <td>
+                             <input class="form-control" type="long" name="woId" value = <%= workorder.getWorkorderId() %> readonly>
+                        </td>
+                        <td>
+                        	<input class="form-control" type="text" name="woDescription" value = "<%=workorder.getDescription()%>" placeholder="description">
+                        </td>
+                        <td>
+                        <select class="form-control"  type="text"  name="woStatus" value = "<%=workorder.getStatus()%>" placeholder="">
+                                            <option value ="<%=workorder.getStatus()%>"> <%=workorder.getStatus()%> </option>
+                                            <option value = "Not Started">Not Started</option>
+                                            <option value = "Started">Started</option>
+                                            <option value = "Cancelled">Cancelled</option>
+                                            <option value = "Finished">Finished</option>
+                                            </select>
+                        </td>
+                        <td>
+                        <select class="form-control"  type="text" name="woPriorityLevel" value = "<%=workorder.getPriorityLevel()%>" placeholder="">
+                                            <option value = "<%=workorder.getPriorityLevel()%>"> <%=workorder.getPriorityLevel()%> </option>
+                                            <option value = "Low">Low</option>
+                                            <option value = "High">High</option>
+                                            </select>
+                        </td>                   
+                        <td>
+                            <input class="form-control" type="date" id = "dp" name="woExpectedFinish" value = "<%=workorder.getExpectedFinish()%>"placeholder= "date"  >
+                        </td>
+                        <td>
+                            <input class="form-control" type="date" id = "dp1" name="woFinishDate" value = <%= workorder.getFinishDate() %>   placeholder="date">
+                        </td>
+                        
+                        
+                        <td>
+                              <button   name = "submit" value = "updateRow"  class="btn btn-default">Update</button> 
+                        </td>
+                        <td>
+                             <button   name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>
+                        </td>
+                       
+                        </form>
                       </tr>
+                      
+                     
                       <%
-                           }
-                          %>
-                          <%
-                           }
-                          %>
-            </table>
-
+                       }
+                      %>
+                      
+                      <%
+                       }
+                      %>
+            </table> 
         <hr>
 
     </div>
@@ -221,6 +257,6 @@ dateFormat: 'mm-dd-yy'
         $('#workorderGrid').dataTable();
     } );
     </script>
-       
+     
     </body>
  </html>

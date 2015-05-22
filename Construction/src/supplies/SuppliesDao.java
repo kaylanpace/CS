@@ -1,5 +1,10 @@
 package supplies;
+import java.util.ArrayList;
 import java.util.List;
+
+import supplies.*;
+import workorder.WorkOrder;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -56,6 +61,45 @@ public class SuppliesDao {
     	Supplies s = em.find(Supplies.class, id);
     	em.remove(s);
     }
+
+
+	public void updateFields(long supplyId, String supplyName, Double quantity, String description, String pocName) {
+		Supplies s = em.find(Supplies.class, supplyId);
+		s.setPocName(pocName);
+		s.setQuantity(quantity);
+		s.setDescription(description);
+		s.setSupplyName(supplyName);
+	}
+
+
+	public List<Supplies> getSuppliesAssigned(Long workorderId) {
+		WorkOrder w = em.find(WorkOrder.class, workorderId);
+		List<Supplies> sList = new ArrayList<Supplies>();
+//		for (int i = 1; i < w.getSupplies().size();i++){
+//		Supplies s = em.find(Supplies.class, w.getSupplies().get(i));
+//		sList.add(s);
+//		}
+		
+		return sList;
+	}
+
+
+	public void updateAssignedTo(Long sid, Long woId) {
+		Supplies s = em.find(Supplies.class, sid);
+		WorkOrder w = em.find(WorkOrder.class, woId);
+		s.addWOtoAssignedTo(w.getWorkorderId());
+	}
+
+
+	public void updateaddWOtoAssignedTo(Long workorderId, long sid) {
+		Supplies s = em.find(Supplies.class, sid);
+		WorkOrder w = em.find(WorkOrder.class,workorderId);
+		s.addWOtoAssignedTo(w.getWorkorderId());
+		
+	}
+	
+	
+	
     
     
 }

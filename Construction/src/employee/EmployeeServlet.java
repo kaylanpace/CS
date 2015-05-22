@@ -86,11 +86,11 @@ public class EmployeeServlet extends HttpServlet {
         	int updateAge = Integer.parseInt(request.getParameter("employeeAge"));
         	
             try {
-            	
-            	employeeDao.updateFirstName(employeeId,updatefirstName);
-            	employeeDao.updateLastName(employeeId,updateLastName);
-            	employeeDao.updateAge(employeeId, updateAge);
-            	employeeDao.updatePosition(employeeId, updateposition);
+            	employeeDao.updateAllFields(employeeId, updatefirstName,updateLastName,updateAge,updateposition);
+//            	employeeDao.updateFirstName(employeeId,updatefirstName);
+//            	employeeDao.updateLastName(employeeId,updateLastName);
+//            	employeeDao.updateAge(employeeId, updateAge);
+//            	employeeDao.updatePosition(employeeId, updateposition);
             	
 			    System.out.print("made it past the update methods");
 		    } catch (Exception e) {}

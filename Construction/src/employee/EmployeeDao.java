@@ -4,6 +4,9 @@ import java.util.List;
 
 
 
+
+
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 //import javax.persistence.EntityManagerFactory;
@@ -62,6 +65,11 @@ public class EmployeeDao {
     	    query.executeUpdate();
           
     }
+    public void updateInWork(long id, boolean tf){
+		Employee e = em.find(Employee.class, id);
+		e.setInWork(tf);
+		em.persist(e);
+	}
            
 //        TypedQuery query2 = em.createQuery(
 //                 "UPDATE Employee SET empLastName = '"+ln+"' WHERE Id = '"+id+"'; ", Employee.class);
@@ -106,6 +114,20 @@ public class EmployeeDao {
             "SELECT g FROM Employee g ORDER BY g.Id", Employee.class);
         return query.getResultList();
     }
+	public void setAssignedTo(Long eid, Long workorderId) {
+		Employee e = em.find(Employee.class, eid);
+		e.setAssignedTo(workorderId);
+		em.persist(e);
+	}
+	public void updateAllFields(Long employeeId, String updatefirstName,
+			String updateLastName, int updateAge, String updateposition) {
+		Employee e = em.find(Employee.class, employeeId);
+		e.setAge(updateAge);
+		e.setEmpFirstName(updatefirstName);
+		e.setEmpLastName(updateLastName);
+		e.setPosition(updateposition);
+		em.persist(e);
+	}
     
     
 }

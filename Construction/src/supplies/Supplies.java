@@ -1,12 +1,15 @@
 package supplies;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
 import poc.POC;
 import uom.UOM;
+import workorder.WorkOrder;
 
 
 @Entity
@@ -36,7 +39,11 @@ private Date expirationDate;
 @Temporal(TemporalType.DATE)
 private Date checkCycle;
 
+@Column(name="assignedTo")
+private List<Long> assignedTo;
 
+@Column(name="inventoryLevel")
+private int inventoryLevel;
 
 @Column(name="pocName")
 private String pocName;
@@ -202,6 +209,33 @@ return pocEmail;
 
 public void setPocEmail(String pocEmail) {
 this.pocEmail = pocEmail;
+}
+
+
+public List<Long> getAssignedTo() {
+	return assignedTo;
+}
+
+
+
+public void setAssignedTo(List<Long> assignedTo) {
+	this.assignedTo = assignedTo;
+}
+
+public void addWOtoAssignedTo(long w){
+	assignedTo.add(w);
+}
+public void removeFromAssignedTo(long w){
+	assignedTo.remove(w);
+}
+public int getInventoryLevel() {
+	return inventoryLevel;
+}
+
+
+
+public void setInventoryLevel(int inventoryLevel) {
+	this.inventoryLevel = inventoryLevel;
 }
 
 // String Representation:

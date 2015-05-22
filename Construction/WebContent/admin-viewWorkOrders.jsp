@@ -149,7 +149,7 @@ function getTdValue() {
                             <a href="#"><i class="fa fa-list-alt fa-fw"></i> Work Orders<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/Construction/admin-viewWorkOrders">View Work Orders</a>
+                                    <a href="/Construction/admin-viewWorkOrders.jsp">View Work Orders</a>
                                 </li>
                                 <li>
                                     <a href="/Construction/workorder.jsp">Create New Work Order</a>
@@ -228,7 +228,7 @@ function getTdValue() {
          								<td id=workDes name = "description">${wr.getDescription()}</td>
          								<td id=workPL name = "priorityLevel">${wr.getPriorityLevel()}</td>
          								<td id=workStatus name = "status">${wr.getStatus()}</td> 
-         								<td><button  name = "submit" value="addWorker" class="btn btn-outline btn-primary btn-lg">Select</button></td>
+         								<td><button  name = "submit" value="selectWorker" class="btn btn-outline btn-primary btn-lg">Select</button></td>
          							
          							</tr>
          						</form>
@@ -251,7 +251,8 @@ function getTdValue() {
                             <div class="bs-example">
                                 <ul class="nav nav-tabs">
                                     <li><a data-toggle="tab" href="#sectionA">Work order information</a></li>
-                                    <li><a data-toggle="tab" href="#sectionB">Assigned employees</a></li>
+                                    <li><a data-toggle="tab" href="#sectionB">Assign employees</a></li>
+                                   <!--  <li><a data-toggle="tab" href="#sectionB2">Available employees</a></li> -->
                                     <li><a data-toggle="tab" href="#sectionC">Building information</a></li>
                                     <li><a data-toggle="tab" href="#sectionD">Assigned supplies</a></li>
                                     <li><a data-toggle="tab" href="#sectionE">Point of contact</a></li>
@@ -262,24 +263,64 @@ function getTdValue() {
                                     <div id="sectionA" class="tab-pane fade in active">
                                         <h3>Work order information</h3>
                                         <table id="workOrderInfoGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                         
+                                         	<form>
                                             <tr>
                                                 <td><b>Work Order ID</b></td>
-                                                <td id= woId style="width: 481px;"value ="">${workOrderSelected.getWorkorderId()}</td>
+                                                <td id= woId >${workOrderSelected.getWorkorderId()}</td>
                                                 
                                             </tr>
                                             <tr>
                                                 <td><b>Description</b></td>
-                                                <td id= woDes style="width: 481px; ">${workOrderSelected.getDescription()}</td>
+                                                <td><input class="form-control" id = woDes style="width: 481px; " type="text" name="woDescription" value = "${workOrderSelected.getDescription()}" placeholder="description"></td>
+                                                <%-- <td id= woDes style="width: 481px; ">${workOrderSelected.getDescription()}</td> --%>
                                             </tr>
                                             
                                             <tr>
                                                 <td><b>Priority Level</b></td>
-                                                <td id= woPL style="width: 481px; ">${workOrderSelected.getPriorityLevel()}</td>
+                                                <%-- <td id= woPL style="width: 481px; ">${workOrderSelected.getPriorityLevel()}</td> --%>
+                                                <td><select id= woPL  class="form-control"  type="text" name="woPriorityLevel" value = "${workOrderSelected.getPriorityLevel()}" placeholder="">
+                                            <option value = "${workOrderSelected.getPriorityLevel()}"> ${workOrderSelected.getPriorityLevel()} </option>
+                                            <option value = "Low">Low</option>
+                                            <option value = "High">High</option>
+                                            </select></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Status</b></td>
+                                                <%-- <td id= woStatus style="width: 481px; ">${workOrderSelected.getStatus()}</td> --%>
+                                                 <td>
+                                            <select id = woStatus  class="form-control"  type="text"  name="woStatus" value = "${workOrderSelected.getStatus()}" placeholder="">
+                                            <option value ="${workOrderSelected.getStatus()}"> ${workOrderSelected.getStatus()}</option>
+                                            <option value = "Not Started">Not Started</option>
+                                            <option value = "Started">Started</option>
+                                            <option value = "Cancelled">Cancelled</option>
+                                            <option value = "Finished">Finished</option>
+                                            </select>
+                                            </td>
+                                            </tr>
+                                            <tr>
+                                            <td><b>Expected Finish</b></td>
+                                             <td>
+                            				<input id = woExpectedFinish  class="form-control" type="date" id = "dp1" name="woExpectedFinish" value = "${workOrderSelected.getExpectedFinish()}"    placeholder="date">
+                       						 </td>
+                       						 </tr>
+                       						 <tr>
+                       						 <td><b>Finish Date</b></td>
+                                             <td><input id = woFinishDate  class="form-control" type="date" id = "dp1" name="woFinishDate" value = "${workOrderSelected.getFinishDate()}"    placeholder="date"></td>
+                       						 </tr>
+                       						 <tr>
+                       						 <td> </td>
+                       						 <td>
+                       						 <button  name = "submit" value = "delete"  class="btn btn-default">Delete</button>     
+                       						 <button name="submit" value="updateRow" class="btn btn-default">Update</button>
+                       						 </td>
+                       						 </tr>
+                       						 </form>
+                                             <%-- <tr>
+                                                <td><b>Status</b></td>
                                                 <td id= woStatus style="width: 481px; ">${workOrderSelected.getStatus()}</td>
+                                            </tr> --%>
+                                            <tr>
+                                           
                                             </tr>
                                     </table>
                                     </div>
@@ -292,15 +333,15 @@ function getTdValue() {
                                     <th data-column-id="id" data-type="numeric" data-identifier="true" >Employee ID</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
-                                    <th>SSN</th>
+                                    <!-- <th>SSN</th> -->
                                     <th>Position</th>
-                                    <th>Age</th>
-                                    <th>isAdmin</th>
+                                  <!--   <th>Age</th>
+                                    <th>isAdmin</th> -->
                                 </tr>
                             </thead>
                              <tbody>
                                 
-                                <c:forEach var="e" items="${employees}">
+                                <c:forEach var="e" items="${inWorkEmployees}">
                                 
                                 <form method = "POST">
          							<tr>
@@ -310,7 +351,7 @@ function getTdValue() {
          								<td id=workDes name = "firstName">${e.getEmpFirstName()}</td>
          								<td id=workPL name = "lastName">${e.getEmpLastName()}</td>
          								<td id=workStatus name = "position">${e.getPosition()}</td> 
-         								<td><button  name = "submit" value="assignWorker" class="btn btn-outline btn-primary btn-lg">Assign this employee</button></td>
+         								<td><button  name = "submit" value="removeWorker" class="btn btn-outline btn-primary btn-lg">Unassign this Worker</button></td>
          							
          							</tr>
          						</form>
@@ -321,8 +362,52 @@ function getTdValue() {
                       
 			</table>
 
-                                       <button type="button" class="btn btn-outline btn-primary btn-lg">Assign employees</button></a>
-                                    </div>
+                                 
+                                        <h3>Available employees</h3>
+                 <table id="employeeGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Employee ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <!-- <th>SSN</th> -->
+                                    <th>Position</th>
+                                    <th>In-Work</th>
+                                    <!-- <th>Age</th>
+                                    <th>isAdmin</th> -->
+                                </tr>
+                            </thead>
+                             <tbody>
+                                
+                                <c:forEach var="ea" items="${availableWorkers}">
+                                
+                                <form method = "POST">
+         							<tr>
+         							
+         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
+         								<td><input type = "long" name = "eid" value = "${ea.getEmpId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "firstName">${ea.getEmpFirstName()}</td>
+         								<td id=workPL name = "lastName">${ea.getEmpLastName()}</td>
+         								<td id=workStatus name = "position">${ea.getPosition()}</td>
+         								<td id=workStatus name = "position">${ea.getInWork()}</td>  
+         								<td><button  name = "submit" value="assignWorker" class="btn btn-outline btn-primary btn-lg">Assign this worker</button></td>
+         							
+         							</tr>
+         						</form>
+           
+        						</c:forEach>
+           						</tbody>  
+                           
+                      
+			</table>
+
+<!--                                        <button type="button" class="btn btn-outline btn-primary btn-lg">Assign employees</button></a>
+ -->                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
                                      <div id="sectionC" class="tab-pane fade">
                                         <h3>Building information</h3>
@@ -339,18 +424,80 @@ function getTdValue() {
                                     </div>
                                     <div id="sectionD" class="tab-pane fade">
                                         <h3>Assigned supplies</h3>
-                                        <table id="suppliesGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Supply ID</th>
-                                                    <th>Supply Name</th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                          
-                                               
-                                        </table>
-                                    </div>
+                 <table id="suppliesGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Supply ID</th>
+                                    <th>Supply Name</th>
+                                    <th>Description</th>
+                                    <!-- <th>SSN</th> -->
+                                    <th>Quantity Assigned</th>
+                                  <!--   <th>Age</th>
+                                    <th>isAdmin</th> -->
+                                </tr>
+                            </thead>
+                             <tbody>
+                                
+                                <c:forEach var="e" items="${assignedSupplies}">
+                                
+                                <form method = "POST">
+         							<tr>
+         							
+         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
+         								<td><input type = "long" name = "sid" value = "${e.getId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "supplyName">${e.getSupplyName()}</td>
+         								<td id=workPL name = "supplyDescription">${e.getDescription()}</td>
+         								<td id=workStatus name = "supplyQuantity">${e.getQuantity()}</td> 
+         								<td><button  name = "submit" value="removeSupply" class="btn btn-outline btn-primary btn-lg">Unassign this Supply</button></td>
+         							
+         							</tr>
+         						</form>
+           
+        						</c:forEach>
+           						</tbody>  
+                           
+                      
+			</table>
+
+                                 
+                                        <h3>Supplies Inventory</h3>
+                 <table id="suppliesGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Supply ID</th>
+                                    <th>Supply Name</th>
+                                    <th>Description</th>
+                                    <!-- <th>SSN</th> -->
+                                    <th>Quantity Assigned</th>
+                                    <!-- <th>Age</th>
+                                    <th>isAdmin</th> -->
+                                </tr>
+                            </thead>
+                             <tbody>
+                                
+                                <c:forEach var="ea" items="${supplies}">
+                                
+                                 <form method = "POST">
+         							<tr>
+         							
+         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
+         								<td><input type = "long" name = "sid" value = "${ea.getId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "supplyName">${ea.getSupplyName()}</td>
+         								<td id=workPL name = "supplyDescription">${ea.getDescription()}</td>
+         								<td id=workStatus name = "supplyQuantity">${ea.getQuantity()}</td> 
+         								<td><button  name = "submit" value="assignSupplies" class="btn btn-outline btn-primary btn-lg">Assign this Supply</button></td>
+         							
+         							</tr>
+         						</form>
+           
+        						</c:forEach>
+           						</tbody>  
+                           
+                      
+			</table>
+
+<!--                                        <button type="button" class="btn btn-outline btn-primary btn-lg">Assign employees</button></a>
+ -->                                    </div>
                                     <div id="sectionE" class="tab-pane fade">
                                         <h3>Point of contact</h3>
                                         <table id="pocGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -507,7 +654,7 @@ $(document).ready(
             changeYear: true
              });
     </script>
-
+${workorders} ${workOrderSelected} ${employees} 
 </body>
 
 </html>

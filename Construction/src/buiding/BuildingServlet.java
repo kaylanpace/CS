@@ -39,7 +39,7 @@ public class BuildingServlet extends HttpServlet{
             throws ServletException, IOException {
  
         // Handle a new building:
-    	BuildingDao.openTransaction();
+    	//BuildingDao.openTransaction();
     	/*
     	String buildingIdstr = request.getParameter("Id");
     	Long buildingId = Long.parseLong(buildingIdstr);
@@ -63,9 +63,10 @@ public class BuildingServlet extends HttpServlet{
 		String pocPhone = request.getParameter("pocPhone");
 		String pocEmail = request.getParameter("pocEmail");
 		
-        if (buildingname != null){
+		String action = request.getParameter("submit");
+        if (action.equalsIgnoreCase("add")){
         	BuildingDao.persist(new Building(buildingname, checkcycle, street, city, state, zip, pocName, pocPhone, pocEmail));
-        	BuildingDao.commitTransaction();
+        	//BuildingDao.commitTransaction();
         }
        
         doGet(request, response);

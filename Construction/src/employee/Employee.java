@@ -1,7 +1,10 @@
 package employee;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 import javax.persistence.*;
+
 import workorder.WorkOrder;
 
 //employee class
@@ -37,8 +40,31 @@ public class Employee implements Serializable {
 
 	//@Column(name="password")
     private String password;
-	
     
+ 
+   
+
+
+
+
+	private long assignedTo;
+
+
+	private boolean inWork = false;
+   
+////    @Column(name="assignedTo")
+//    private ArrayList<Long> assignedTo;
+//    
+//    public void addWorker(long id){
+//    	assignedTo.add(id);
+//    }
+//	public void clearAssignedTo(){
+//		assignedTo.clear();
+//	}
+//	public ArrayList<Long> getWorkers(){
+//		return assignedTo;
+//	}
+
 	//Provides a list of all workorder Ids
 	/*We will use this key to select a workorder for the employee
 	from the detailed employee GUI.*/
@@ -172,6 +198,27 @@ public class Employee implements Serializable {
 	public void setWorkorderId(WorkOrder workorderId) {
 		this.workers = workorderId;
 	}
+	
+    public boolean getInWork() {
+			return inWork;
+		}
+
+
+
+	public void setInWork(boolean inWork) {
+			this.inWork = inWork;
+		}
+
+	 public long getAssignedTo() {
+			return assignedTo;
+		}
+
+
+
+	public void setAssignedTo(long assignedTo) {
+			this.assignedTo = assignedTo;
+		}
+	
 
 	// String Representation:
     @Override

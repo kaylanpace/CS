@@ -130,7 +130,7 @@
 
                                         
 
-                                        <button type="submit" value="Add" class="btn btn-default">Submit</button>
+                                        <button type="submit"name = "submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>

@@ -41,7 +41,7 @@
 
     <!-- Page Content -->
     <div class="container">
-<a href="/Construction/admin-viewWorkOrders" > Back to all Workorders</a>
+<a href="/Construction/admin-viewWorkOrders" > Back to Dashboard</a>
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
@@ -114,7 +114,7 @@ changeMonth: true,
 dateFormat: 'mm-dd-yy'
 });
     </script>
-                                        <button type="submit" value="Add" class="btn btn-default">Submit</button>
+                                        <button type="submit"name = "submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     <!-- <input type="submit" value="Add" /> -->
                                     </form>
@@ -133,67 +133,130 @@ dateFormat: 'mm-dd-yy'
         
            
            
-            <table id="suppliesGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Supply Name</th>
-                        <th>Quantity</th>
-                        <th>Description</th>
-                        <th>Expiration Date</th>
-                        <th>Check Cycle</th>
-                        <th>Vendor Name</th>
-                        <th>Vendor Phone</th>
-                        <th>Vendor E-mail</th>
-                    </tr>
-                </thead>
-              
-                    <%
-                      @SuppressWarnings("unchecked")
-                      List<Supplies> suppliess = (List<Supplies>)request.getAttribute("supplies");
-                       if (suppliess != null) {
-                        for (Supplies supplies : suppliess) {
-                     
-                      %>
-                      <tr>
-                        <td>
-                            <%= supplies.getSupplyName() %>
-                        </td>
-                        <td>
-                            <%= supplies.getQuantity() %>
-                        </td>
-                      
-                        <td>
-                            <%= supplies.getDescription() %>
-                        </td>
-                        <td>
-                            <%= supplies.getExpirationDate() %>
-                        </td>
-                       
-                        <td>
-                            <%= supplies.getCheckCycle() %>
-                        </td>
-                        <td>
-                            <%= supplies.getPocName() %>
-                        </td>
-                        <td>
-                            <%= supplies.getPocPhone() %>
-                        </td>
-                        <td>
-                            <%= supplies.getPocEmail() %>
-                        </td>
-                      </tr>
-                      <%
-                       }
-                      %>
-                      <%
-                       }
-                      %>
-            </table>
+            
 
         <hr>
 
     </div>
     <!-- /.container -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="container">
+		
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Edit Supplies</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+
+        <!-- Content Row -->       
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Edit Supply Information
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                
+                                  <table id="itemsGrid" name = "grid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                    	<th>Supply Id</th>
+                    	<th>Building Name</th>
+			            <th>Point of Contact</th>
+			            <th>Description</th>
+			            <th>Quantity</th>
+                        
+                    </tr>
+                </thead>
+               
+                    <%
+                      @SuppressWarnings("unchecked")
+                      List<Supplies> s = (List<Supplies>)request.getAttribute("supplies");
+                       if (s != null) {
+                        for (Supplies sp : s) {
+                      
+                      %>
+                      
+                      <tr>
+                      <form method="POST">
+                        <td>
+                             <input class="form-control" type="long" name="supplyId" value = <%= sp.getId() %> readonly>
+                        </td>
+                        <td>
+                        	<input class="form-control" type="text" name="supplyName" value = "<%=sp.getSupplyName()%>" placeholder="Supply Name">
+                        </td>
+                        <td>
+                        	<input class="form-control" type="text" name="supplyPoc" value = "<%=sp.getPocName()%>" placeholder="Point of Contact: Name">
+                        </td>
+                          <td>
+                        	<input class="form-control" type="text" name="supplyDescription" value = "<%=sp.getDescription()%>" placeholder="Supply description">
+                        </td>
+                        <td>
+                        	<input class="form-control" type="int" name="supplyQty" value = "<%=sp.getQuantity()%>" placeholder="0">
+                        </td>
+                        
+						  
+                        <td>
+                              <button   name = "submit" value = "updateRow"  class="btn btn-default">Update</button> 
+                        </td>
+                        <td>
+                             <button   name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>
+                        </td>
+                        </form>
+                      </tr>
+                      
+                     
+                      <%
+                       }
+                      %>
+                      
+                      <%
+                       }
+                      %>
+            </table> 
+                                
+                              
+                                
+                                
+                                
+                            </div>
+                                
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+         
+        <hr>
+
+    </div>
+    <!-- /.container -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

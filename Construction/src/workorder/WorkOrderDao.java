@@ -2,6 +2,7 @@ package workorder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,6 +90,11 @@ public class WorkOrderDao {
 		
 		
 	}
+	public void addWorker(long id,Employee e){
+		WorkOrder w = em.find(WorkOrder.class, id);
+		w.addWorker(e);
+		em.persist(w);
+	}
 	public void updateWorkOrderFields(Long woId, String description,
 			String priorityLevel, String status, Date expectedFinish,
 			Date finishDate) {
@@ -101,6 +107,22 @@ public class WorkOrderDao {
 		 em.persist(w);
 		 
 		 
+	}
+	
+	public List<Employee> getWorkersAssignedtoWorkOrderByWorkOrderId(long id){
+		List<Employee> elist = em.find(WorkOrder.class, id).getWorkers();
+    	return elist;
+	}
+	public List<Employee> getAssignedEmployees(long wid){
+		TypedQuery query = em.createQuery(
+                "Select From Employee Where assignedTo = "+wid, WorkOrder.class);
+		return query.getResultList();
+	}
+	
+	public List<Employee> getAvailableWorkers(){
+		TypedQuery query = em.createQuery(
+                "Select From Employee WHERE inWork = false ", Employee.class);
+		return query.getResultList();
 	}
 	
     
