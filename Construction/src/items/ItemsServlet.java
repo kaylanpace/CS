@@ -97,9 +97,9 @@ public class ItemsServlet extends HttpServlet{
 			if(selected !=""){
 				
 			try {
-				this.description = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getDescription();
-				this.supplyName = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getSupplyName();
-				this.supplyId = SuppliesDao.getSingleSupply(SuppliesDao.getSupplyByName(selected).getId()).getId();
+				this.description = SuppliesDao.findById(SuppliesDao.getSupplyByName(selected).getId()).getDescription();
+				this.supplyName = SuppliesDao.findById(SuppliesDao.getSupplyByName(selected).getId()).getSupplyName();
+				this.supplyId = SuppliesDao.findById(SuppliesDao.getSupplyByName(selected).getId()).getId();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

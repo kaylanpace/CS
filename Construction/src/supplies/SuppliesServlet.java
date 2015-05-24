@@ -19,6 +19,9 @@ private static final long serialVersionUID = 1L;
 // Injected DAO EJB:
 @EJB SuppliesDao suppliesDao;
 
+Supplies selectedSupply;
+long supplyId;
+
 @Override
 public void doGet(
 HttpServletRequest request, HttpServletResponse response)
@@ -26,7 +29,9 @@ throws ServletException, IOException {
 
 // Display the list of supplies:
 request.setAttribute("supplies", suppliesDao.getAllSupplies());
-request.getRequestDispatcher("/supplies.jsp").forward(request, response);
+request.setAttribute("supplySelected", selectedSupply);
+
+request.getRequestDispatcher("/supplies1.jsp").forward(request, response);
 return;
 }
 
@@ -69,12 +74,18 @@ if (action.equalsIgnoreCase("add")){
 	}
 	suppliesDao.persist(new Supplies(supplyName, quantity, description, expirationDate, checkcycle , pocName,pocPhone,pocEmail));
 }
+
+else if (action.equalsIgnoreCase("selectSupply")){
+	long supplyId = Long.parseLong(request.getParameter("id"));
+	this.supplyId = supplyId;
+	selectedSupply = suppliesDao.findById(this.supplyId);
+}
 else if (action.equalsIgnoreCase("updateRow")){
-	long supplyId = Long.parseLong(request.getParameter("supplyId"));
-	String supplyName = request.getParameter("supplyName");
-	Double quantity = Double.parseDouble(request.getParameter("supplyQty"));
-	String description = request.getParameter("supplyDescription");
-	String pocName = request.getParameter("supplyPoc");
+	
+	String supplyName = request.getParameter("sSupplyName");
+	Double quantity = Double.parseDouble(request.getParameter("sQuantity"));
+	String description = request.getParameter("sDescription");
+	String pocName = request.getParameter("sPoc");
 	suppliesDao.updateFields(supplyId, supplyName,quantity,description,pocName);
 }
 else if (action.equalsIgnoreCase("deleteRow")){

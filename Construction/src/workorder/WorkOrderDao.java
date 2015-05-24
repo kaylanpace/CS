@@ -124,6 +124,13 @@ public class WorkOrderDao {
                 "Select From Employee WHERE inWork = false ", Employee.class);
 		return query.getResultList();
 	}
+	public void updateAddSupply(Long workorderId, Long sid) {
+		WorkOrder w = em.find(WorkOrder.class, workorderId);
+		if(!w.getSupplies().contains(sid)){
+			w.addSupply(sid);
+			em.persist(w);
+		}
+	}
 	
     
 }

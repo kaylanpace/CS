@@ -32,9 +32,7 @@ public class Employee implements Serializable {
     @Column(name="age")
     private int age;
     
-    //@Column(name="isAdmin")
-    private boolean isAdmin;
-    
+   
     //@Column(name="userName")
     private String userName;
 
@@ -81,13 +79,13 @@ public class Employee implements Serializable {
     
   
  
-    public Employee(String empFirstName, String empLastName,  String position, int age, boolean isAdmin, String userName, String password) {
+    public Employee(String empFirstName, String empLastName,  String position, int age,  String userName, String password) {
        
         this.empFirstName = empFirstName;
         this.empLastName = empLastName;
         this.position = position;
         this.age = age;
-        this.isAdmin = isAdmin;
+        //this.isAdmin = isAdmin;
         this.userName = userName;
         this.password = password;
         
@@ -158,15 +156,7 @@ public class Employee implements Serializable {
 
 
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
+	
 	
 	public String getUserName() {
 		return userName;
@@ -224,7 +214,7 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return  empFirstName + " " + empLastName
-        		+ " " + position + " " + age + " " + isAdmin + 
+        		+ " " + position + " " + age + " "  + 
         		" " + userName + " " + password;
     }
 }

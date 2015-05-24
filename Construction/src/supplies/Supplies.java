@@ -1,6 +1,7 @@
 package supplies;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +41,7 @@ private Date expirationDate;
 private Date checkCycle;
 
 @Column(name="assignedTo")
-private List<Long> assignedTo;
+private List<Long> assignedTo = new ArrayList<Long>();
 
 @Column(name="inventoryLevel")
 private int inventoryLevel;

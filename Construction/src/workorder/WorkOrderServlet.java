@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 import supplies.Supplies;
 import supplies.SuppliesDao;
@@ -28,7 +30,7 @@ private static final long serialVersionUID = 1L;
 @EJB SuppliesDao suppliesDao;
 List<Employee> inWorkEmployeeList = null;
 List<Supplies> supplies = null;
-Long workorderId = (long)0;
+Long workorderId = null;
 WorkOrder selectedWorkOrder = null;
 Employee selectedEmployee = null;
 
@@ -38,34 +40,36 @@ public void doGet(
 HttpServletRequest request, HttpServletResponse response)
 throws ServletException, IOException {
 
-// Display the list of workorders:
+
 request.setAttribute("workorders", workorderDao.getWorkOrders());
 request.setAttribute("employees", employeeDao.getEmployees());
+request.setAttribute("supplies", suppliesDao.getAllSupplies());
 //based on global variable - set when workorder is selected on admin-viewWorkOrders.jsp
+//get employees not assigned to anything that are worker-position
+request.setAttribute("availableWorkers", workorderDao.getAvailableWorkers());
+//get work-order to modify when user selects
 try {
 	request.setAttribute("workOrderSelected", selectedWorkOrder);
 } catch (Exception e) {}
-//get employees assiged to a work-order
 
-
-if(workorderId!=0){
+if(workorderId!=null){
+	//get employees assiged to a work-order
 request.setAttribute("inWorkEmployees", workorderDao.getAssignedEmployees(workorderId));
+//get assigned supplies
 request.setAttribute("assignedSupplies", supplies);
 }
 
 
 
-//get employees not assigned to anything that are worker-position
-
-request.setAttribute("availableWorkers", workorderDao.getAvailableWorkers());
-request.setAttribute("supplies", suppliesDao.getAllSupplies());
 
 
 
-request.getRequestDispatcher("/admin-viewWorkOrders.jsp").forward(request, response);
-request.getRequestDispatcher("/workorder.jsp").forward(request, response);
 
-request.getRequestDispatcher("/viewAllWorkorders.jsp").forward(request, response);
+request.getRequestDispatcher("/workorder1.jsp").forward(request, response);
+//request.getRequestDispatcher("/admin-viewWorkOrders.jsp").forward(request, response);
+//request.getRequestDispatcher("/workorder.jsp").forward(request, response);
+//
+//request.getRequestDispatcher("/viewAllWorkorders.jsp").forward(request, response);
 
 
 
@@ -112,20 +116,20 @@ workorderDao.persist(new WorkOrder(description, priorityLevel, status, comments,
 }
 else if (action.equalsIgnoreCase("deleteRow")){
 
-	Long woId = Long.parseLong(request.getParameter("woId"));
+//  Long woId = Long.parseLong(request.getParameter("woId"));
 	String description = request.getParameter("woDescription");
 	String priorityLevel = request.getParameter("woPriorityLevel");
 	String status = request.getParameter("woStatus");
 	String expectedFinishstr = request.getParameter("woExpectedFinish");
 	String finishDate = request.getParameter("woFinishDate");
     try {
-    	workorderDao.removeWorkOrder(woId);
+    	workorderDao.removeWorkOrder(workorderId);
 	} catch (Exception e) {}
-	System.out.print("delete row was pushed, id = "+woId);
+	System.out.print("delete row was pushed, id = "+workorderId);
 }
 else if (action.equalsIgnoreCase("updateRow")){
 	System.out.print("updateRow button pushed");
-	Long woId = Long.parseLong(request.getParameter("woId"));
+//	Long woId = Long.parseLong(request.getParameter("woId"));
 	String description = request.getParameter("woDescription");
 	String priorityLevel = request.getParameter("woPriorityLevel");
 	String status = request.getParameter("woStatus");
@@ -144,15 +148,16 @@ else if (action.equalsIgnoreCase("updateRow")){
 	
 	
 	 try {
-		 workorderDao.updateWorkOrderFields(woId,description,priorityLevel,status,expectedFinish,finishDate);     		   
+		 workorderDao.updateWorkOrderFields(workorderId,description,priorityLevel,status,expectedFinish,finishDate);     		   
 	    } catch (Exception e) {}
 }
-else if (action.equalsIgnoreCase("selectWorker")){
-	System.out.print("select was pushed");
+else if (action.equalsIgnoreCase("selectWorkOrder")){
+	System.out.print("select was pushed, workorder id is = "+this.workorderId);
 	
 	try {
 		this.workorderId = Long.parseLong(request.getParameter("id"));
 	} catch (NumberFormatException e) {}
+	System.out.print("select was pushed, workorder id is = "+this.workorderId);
 	//System.out.print("id = " + this.workorderId);
 	selectedWorkOrder = workorderDao.findById(workorderId);
 	if(workorderId !=0){}
@@ -184,28 +189,43 @@ else if (action.equalsIgnoreCase("removeWorker")){
 		} catch (Exception e) {}
 	
 }
+
 //delete the work-order 
 else if(action.equalsIgnoreCase("delete")){
 	System.out.print("delete button pushed");
 }
+
 //add supplies to a work-order
 else if (action.equalsIgnoreCase("assignSupplies")){
 	//var amount  - get the amount requested
 	//suppliesDao.updateInventoryLevel();
 	
 	Long sid = Long.parseLong(request.getParameter("sid"));
-	System.out.print("workorderId is"+ workorderId+", sid is "+sid);
+	System.out.print("assignSupplies pushed: workorderId is"+ workorderId+", sid is "+sid);
 	if (workorderId!=0){
 	suppliesDao.updateAssignedTo(sid,workorderId);
-	suppliesDao.updateaddWOtoAssignedTo(workorderId, sid);
-	supplies = suppliesDao.getSuppliesAssigned(sid);
+	workorderDao.updateAddSupply(workorderId,sid);
+						//supplies = suppliesDao.getSuppliesAssigned(workorderId);
+	supplies = convertLongToSupplyList(workorderDao.findById(workorderId).getSupplies());
 	}
+	
 }
 //remove supplies from a work-order
 else if (action.equalsIgnoreCase("removeSupply")){
-	
+	Long sid = Long.parseLong(request.getParameter("sid"));
+	suppliesDao.removeSupply(sid, workorderId);
 }
 
+
 doGet(request, response);
+}
+public List<Supplies> convertLongToSupplyList(List<Long> list){
+	List<Supplies> s = new ArrayList<Supplies>();
+	for(int i =0;i<list.size();i++){
+		
+		s.add(suppliesDao.findById(list.get(0)));
+	}
+	return s;
+	
 }
 }

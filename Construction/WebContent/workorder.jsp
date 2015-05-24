@@ -80,7 +80,7 @@ request.setParameter("servletParam",servletParam);
                                         
                                         <div class="form-group">
                                             <label>Priority Level</label>
-                                            <select class="form-control" id = "theinput" type="text" onChange = "combo(this,'theinput’)" name="priorityLevel" placeholder="">
+                                            <select class="form-control" id = "theinput" type="text" onChange = "combo(this,'theinputâ)" name="priorityLevel" placeholder="">
                                             <option> </option>
                                             <option>Low</option>
                                             <option>High</option>
@@ -88,7 +88,7 @@ request.setParameter("servletParam",servletParam);
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>
-                                            <select class="form-control" id = "theinput" type="text" onChange ="combo(this,'theinput’)"  name="status" placeholder="">
+                                            <select class="form-control" id = "theinput" type="text" onChange ="combo(this,'theinputâ)"  name="status" placeholder="">
                                             <option></option>
                                             <option>Not Started</option>
                                             <option>Started</option>

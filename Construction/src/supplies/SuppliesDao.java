@@ -52,7 +52,7 @@ public class SuppliesDao {
                 "SELECT FROM Supplies WHERE supplyName = '"+sName+"'", Supplies.class);
     	return query.getSingleResult();
     }
-    public Supplies getSingleSupply(long id){
+    public Supplies findById(long id){
     	Supplies s = em.find(Supplies.class, id);
     	return s;
     }
@@ -72,31 +72,45 @@ public class SuppliesDao {
 	}
 
 
-	public List<Supplies> getSuppliesAssigned(Long workorderId) {
+	public List<Long> getSuppliesAssigned(Long workorderId) {
+		
 		WorkOrder w = em.find(WorkOrder.class, workorderId);
-		List<Supplies> sList = new ArrayList<Supplies>();
+//		List<Supplies> sList = new ArrayList<Supplies>();
+//		System.out.print("sList size is"+sList.size()+": w.getSupplies() size is "+w.getSupplies().size());
 //		for (int i = 1; i < w.getSupplies().size();i++){
 //		Supplies s = em.find(Supplies.class, w.getSupplies().get(i));
 //		sList.add(s);
+//		System.out.print("sList size is"+sList.size()+": w.getSupplies() size is "+w.getSupplies().size());
 //		}
 		
-		return sList;
+		return w.getSupplies();
 	}
 
-
+	//add a supply to a work-order
 	public void updateAssignedTo(Long sid, Long woId) {
 		Supplies s = em.find(Supplies.class, sid);
 		WorkOrder w = em.find(WorkOrder.class, woId);
-		s.addWOtoAssignedTo(w.getWorkorderId());
+		if(!s.getAssignedTo().contains(w.getWorkorderId())){
+			s.addWOtoAssignedTo(w.getWorkorderId());
+			em.persist(s);
+		}
 	}
-
-
-	public void updateaddWOtoAssignedTo(Long workorderId, long sid) {
+	//remove a supply from a work-order
+	public void removeSupply(Long sid, Long woId){
 		Supplies s = em.find(Supplies.class, sid);
-		WorkOrder w = em.find(WorkOrder.class,workorderId);
-		s.addWOtoAssignedTo(w.getWorkorderId());
-		
+		WorkOrder w = em.find(WorkOrder.class, woId);
+		if(s.getAssignedTo().contains(w.getWorkorderId())){
+			s.removeFromAssignedTo(w.getWorkorderId());
+			em.persist(s);
+		}
 	}
+
+
+	
+	
+
+
+	
 	
 	
 	

@@ -14,7 +14,7 @@
     <meta name="author" content="">
 
     <title>ConstructionPal - Login</title>
-
+  <img src="/ConstructionPal_Logo.jpg" />
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     

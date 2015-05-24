@@ -64,7 +64,9 @@ public void setSupplies(List<Long> supplies) {
 }
 
 public void addSupply(Long sid){
+	if (!supplies.contains(sid)){
 	this.supplies.add(sid);
+	}
 }
 public void removeSupply(Supplies s){
 	supplies.remove(s);
@@ -199,4 +201,6 @@ this.comments = comments;
 public String toString() {
 return description + " " + priorityLevel + " " + status;
 }
+
+
 }

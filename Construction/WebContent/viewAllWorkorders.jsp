@@ -191,6 +191,20 @@
                       <%
                        }
                       %>
+                        <script>
+      $( "#dp" ).datepicker({
+changeMonth: true,
+
+dateFormat: 'mm-dd-yy'
+});
+    </script>
+    <script>
+      $( "#dp1" ).datepicker({
+changeMonth: true,
+
+dateFormat: 'mm-dd-yy'
+});
+    </script>
             </table> 
                                 
                               
@@ -212,20 +226,7 @@
          <script src="js/jquery.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script>
-      $( "#dp" ).datepicker({
-changeMonth: true,
-
-dateFormat: 'mm-dd-yy'
-});
-    </script>
-    <script>
-      $( "#dp1" ).datepicker({
-changeMonth: true,
-
-dateFormat: 'mm-dd-yy'
-});
-    </script>
+  
         <hr>
 
     </div>
