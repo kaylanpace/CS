@@ -2,6 +2,8 @@ package employee;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.*;
 
@@ -32,12 +34,15 @@ public class Employee implements Serializable {
     @Column(name="age")
     private int age;
     
+    private Date dob;
    
     //@Column(name="userName")
     private String userName;
 
 	//@Column(name="password")
     private String password;
+    
+    private Boolean isAdmin;
     
  
    
@@ -79,16 +84,29 @@ public class Employee implements Serializable {
     
   
  
-    public Employee(String empFirstName, String empLastName,  String position, int age,  String userName, String password) {
+    public Employee(String empFirstName, String empLastName,  String position, Date dob, boolean isAdmin, String userName, String password) {
        
         this.empFirstName = empFirstName;
         this.empLastName = empLastName;
         this.position = position;
-        this.age = age;
-        //this.isAdmin = isAdmin;
+        this.dob = dob;
+        this.age = getAge(this.dob);
+        this.isAdmin = isAdmin;
         this.userName = userName;
         this.password = password;
         
+    }
+    
+    // Takes the employee's date of birth and calculates age
+    public int getAge(Date empDob)
+    {
+    	Calendar dob = Calendar.getInstance();
+    	dob.setTime(empDob);
+    	Calendar today = Calendar.getInstance();
+    	int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+    	if (today.get(Calendar.DAY_OF_YEAR) <= dob.get(Calendar.DAY_OF_YEAR))
+    	age--;
+    	return age;
     }
     
     //Access Methods

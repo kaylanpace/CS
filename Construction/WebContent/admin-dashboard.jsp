@@ -55,27 +55,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Construction/admin-dashboard.jsp">ConstructionPal</a>
             </div>
             <!-- /.navbar-header -->
+            <ul class="nav navbar-top-link navbar-left">
+				<li>
+					<img src="ConstructionPal_Fotor.jpg" height="51">
+				</li>            
+            </ul>
 
             <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
+            	<li><a href="login.jsp"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
             </ul>
             <!-- /.navbar-top-links -->
 
@@ -83,69 +72,19 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a href="/Construction/admin-dashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="admin-dashboard.jsp"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> Employees<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Construction/viewAllEmployees.jsp">View Employees</a>
-                                </li>
-                                <li>
-								   <a href="/Construction/employee.jsp">Create New Employees</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="workorder"><i class="fa fa-list-alt fa-fw"></i> Work Orders</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-list-alt fa-fw"></i> Work Orders<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                               
-                                <li>
-                                    <a href="/Construction/workorder.jsp">Create New Work Order</a>
-                                   
-                                </li>
-                                <li>
-                                	 <a href="/Construction/viewAllWorkorders.jsp">View Work-Orders</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="employee"><i class="fa fa-user fa-fw"></i> Employees</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-building-o fa-fw"></i> Buildings<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="index.html">View Buildings</a>
-                                </li>
-                                <li>
-                                    <a href="index.html">Add Buildings </a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="building"><i class="fa fa-building-o fa-fw"></i> Buildings</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Supplies<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="index.html">View Supplies</a>
-                                </li>
-                                <li>
-                                    <a href="index.html">Order Supplies</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-gears fa-fw"></i> Equipment<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="index.html">View Equipment</a>
-                                </li>
-                                <li>
-                                    <a href="index.html">Order Equipment</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="supplies"><i class="fa fa-wrench fa-fw"></i> Supplies</a>
                         </li>
                     </ul>
                 </div>
@@ -159,21 +98,20 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                    <p style="width: 260px; height: 28px; ">You are logged in as an administrator.</p>
-                       <h1 class="page-header">Welcome  <% request.getParameter("username");%> !</h1> 
                         
+                        <h1>
+                        	Welcome. Select a task from the menu to begin.
+                        </h1>
                         
                     </div>
                     <!-- /.col-lg-12 -->
-                    <button type="button"onclick="document.location.href='/Construction/admin-viewWorkOrders.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 136px; ">Work Orders</button>
-                        <a href="admin-addWorkOrders.html">  <button type="button"onclick="document.location.href='admin-viewEmployees.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 138px; ">Employees</button></a>
-                        <button type="button"onclick="document.location.href='supplies.jsp'" class="btn btn-outline btn-primary btn-lg" style="width: 141px; ">  Supplies </button>
+                    
                 </div>
                 <!-- /.row -->
                 
                 <hr>
                 <!-- Footer -->
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><footer>
+                <footer>
                     <div class="row">
                         <div class="col-lg-12">
                             <p>Copyright &copy; AlphaTech 2015</p>

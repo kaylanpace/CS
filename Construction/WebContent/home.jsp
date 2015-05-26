@@ -37,14 +37,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/Construction/home.jsp">ConstructionPal</a>
+                <a class="navbar-brand" href="home.jsp">ConstructionPal</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
               
                    <li>
-                        <a href="/Construction/login.jsp">LogIn</a>
+                        <a href="login.jsp">LogIn</a>
                     </li>
 
                     
@@ -76,7 +76,7 @@
             <div class="item">
                 <div class="fill" style="background-image:url('http://upwordstranslation.com/wp-content/uploads/2013/11/construction-work.jpg');"></div>
                 <div class="carousel-caption">
-                    <!-- <h2>Caption 2</h2> -->
+                    <!-- <h2>We are here for You</h2> -->
                 </div>
             </div>
             <div class="item">
