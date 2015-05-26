@@ -68,7 +68,7 @@ request.setAttribute("assignedSupplies", supplies);
 
 
 
-request.getRequestDispatcher("/workorder1.jsp").forward(request, response);
+request.getRequestDispatcher("/workorder.jsp").forward(request, response);
 //request.getRequestDispatcher("/admin-viewWorkOrders.jsp").forward(request, response);
 //request.getRequestDispatcher("/workorder.jsp").forward(request, response);
 //
