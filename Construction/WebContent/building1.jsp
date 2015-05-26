@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ConstructionPal - Employees</title>
+    <title>ConstructionPal - Buildings</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
     <script src="browser_components/datatables/media/js/jquery.dataTables.min.js"></script>
 
@@ -144,7 +144,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                     <img src="ConstructionPal.jpg" height="75" width="200">
-                        <h1 class="page-header">Employees</h1>
+                        <h1 class="page-header">Buildings</h1>
                         
                         
                         <div class="row">
@@ -159,7 +159,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">View Employees</a>
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">View Buildings</a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapseOne" class="panel-collapse collapse in">
@@ -167,34 +167,30 @@
                                                         <table id="example" class="display" cellspacing="0" width="100%">
 			                     <thead>    
                                 <tr>
-                                    <th>Employee ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Position</th>
-                                    <th>In-Work</th>
-                                    <th>Work Order Assigned To</th>
-                                    <th></th>
+                                    <th>Building ID</th>
+                                    <th>Building Name</th>
+                                    <th>Location</th>
+                                    <th>POC</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 
-                                <c:forEach var="e" items="${employees}">
+                                <%-- <c:forEach var="wr" items="${supplies}">
                                 
                                 <form method = "POST">
          							<tr>
          							
-         								<td><input type ="long" name ="eid" value = "${e.getEmpId()}" readonly style="width: 46px; "></td>
-         								<td id=eFN name = "firstName">${e.getEmpFirstName()}</td>
-         								<td id=eLN name = "lastName">${e.getEmpLastName()}</td>
-         								<td id=ePos name = "position">${e.getPosition()}</td>
-         								<td id=eAge name = "age">${e.getInWork()}</td>
-         								<td id=eAssignedTo name = "age">${e.getAssignedTo()}</td>   
-         								<td><button  name = "submit" value="selectEmployee" class="btn btn-outline btn-primary btn-lg">Select</button></td>
+         								<td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td>
+         								<td><input type = "long" name ="id" value = "${wr.getId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "description">${wr.getSupplyName()}</td>
+         								<td id=workPL name = "priorityLevel">${wr.getQuantity()}</td>
+         								<td id=workStatus name = "status">${wr.getDescription()}</td> 
+         								<td><button  name = "submit" value="selectSupply" class="btn btn-outline btn-primary btn-lg">Select</button></td>
          							
          							</tr>
          						</form>
            
-        						</c:forEach>
+        						</c:forEach> --%>
            						</tbody>                 
                    
             			</table>
@@ -205,52 +201,50 @@
                                                         <div class="well">
                                                             <div class="bs-example">
                                                                 <ul class="nav nav-tabs">
-                                                                    <li><a data-toggle="tab" href="#sectionA">Employee Information</a></li>
-                                                                    <li><a data-toggle="tab" href="#sectionB">Work Order Assigned To</a></li>
+                                                                    <li><a data-toggle="tab" href="#sectionA">Building Information</a></li>
                                                                     
                                                                 </ul>
                                                                 <div class="tab-content">
 <div id="sectionA" class="tab-pane fade in active">
                                    <div class = "panel panel-default">
-                                     <h3>Employee Information</h3>
-                                       <table id="employeeInfoGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                     <h3>Building Information</h3>
+                                       <table style="width: 300px;" id="supplyInfoGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                          <form method = "POST">
                                             <tr>
-                                                <td><b>Employee ID</b></td>
-                                                <td id= eId >${employeeSelected.getEmpId()}</td>
+                                                <td><b>Building ID</b></td>
+                                                <td id= sId >${supplySelected.getId()}</td>
                                                 
                                             </tr>
                                             <tr>
-                                                <td><b>First Name</b></td>
-                                                <td><input style="width: 300px;" class="form-control" id = eFN style="width: 481px;" type="text" name="empFirstName" value = "${employeeSelected.getEmpFirstName()}" placeholder="first name"></td>
-                                                <%-- <td id= woDes style="width: 481px; ">${workOrderSelected.getDescription()}</td> --%>
-                                            </tr>
-                                             <tr>
-                                                <td><b>Last Name</b></td>
-                                                <td><input style="width: 300px;" class="form-control" id = eLN style="width: 481px;" type="text" name="empLastName" value = "${employeeSelected.getEmpLastName()}" placeholder="last name"></td>
+                                                <td><b>Building Name</b></td>
+                                                <td><input style="width: 300px;" class="form-control" id = woDes style="width: 481px; " type="text" name="sDescription" value = "${supplySelected.getDescription()}" placeholder="description"></td>
                                                 <%-- <td id= woDes style="width: 481px; ">${workOrderSelected.getDescription()}</td> --%>
                                             </tr>
                                             
                                             <tr>
-                                                <td><b>Position</b></td>
+                                                <td><b>Address</b></td>
                                                 <%-- <td id= woPL style="width: 481px; ">${workOrderSelected.getPriorityLevel()}</td> --%>
-                                                <td><select style="width: 300px;" id= ePos style="width: 300px; " class="form-control"  type="text" name="empPosition" value = "${employeeSelected.getPosition()}" placeholder="position">
-                                            <option value = "${employeeSelected.getPosition()}"> ${employeeSelected.getPosition()} </option>
-                                            <option value = "Worker">Worker</option>
-                                            <option value = "Supervisor">Supervisor</option>
-                                            <option value = "Administrator">Administrator</option>
-                                            </select></td>
+                                                <td><input style="width: 300px;" id= woPL  class="form-control"  type="text" name="sSupplyName" value = "${supplySelected.getSupplyName()}" placeholder="">
+                                            
                                             </tr>
-                                           
                                             <tr>
-                                                <td><b>Age</b></td>
-                                                <td><input style="width: 300px;" class="form-control" id = eAge style="width: 481px; " type="int" name="empAge" value = "${employeeSelected.getAge()}" placeholder="description"></td>
-                                                <%-- <td id= woDes style="width: 481px; ">${workOrderSelected.getDescription()}</td> --%>
+                                                <td><b>Point of Contact</b></td>
+                                                <%-- <td id= woPL style="width: 481px; ">${workOrderSelected.getPriorityLevel()}</td> --%>
+                                                <td><input style="width: 300px;" id= woPL  class="form-control"  type="text" name="sPoc" value = "${supplySelected.getPocName()}" placeholder="">
+                                            
                                             </tr>
+                                            <tr>
+                                                <%-- <td><b>Quantity</b></td>
+                                                <td id= woStatus style="width: 481px; ">${workOrderSelected.getStatus()}</td>
+                                                 <td>
+                                            <input style="width: 300px;" id = woStatus  class="form-control"  type="integer"  name="sQuantity" value = "${workOrderSelected.getQuantity()}" placeholder="">
+                                            
+                                            </td> --%>
+                                            </tr>
+                                            <tr>
                                             <td></td>
-                       						 <td>
-                       						 <button  name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>     
-                       						 <button  name="submit" value="updateRow" class="btn btn-default">Update</button>
+                       						 <td><button  name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>     
+                       						 <button  name="submit" value="updateRow" class="btn btn-default">Update</button></td>
                        						 </td>
                        						 </tr>
                        					 </form>
@@ -258,90 +252,12 @@
                                       </table>
                                     </div>
                                   </div>
-<div id="sectionB" class="tab-pane fade">
-                                                                        <h3>Work-Order Assigned To</h3>
-                		 <table id="employeeGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Work Order ID</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <!-- <th>SSN</th> -->
-                                    <th>Priority Level</th>
-                                  <!--   <th>Age</th>
-                                    <th>isAdmin</th> -->
-                                </tr>
-                            </thead>
-                             <tbody>
-                                
-                                <c:forEach var="w" items="${workOrderAssignedTo}">
-                                
-                                <form method = "POST">
-         							<tr>
-         							
-         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
-         								<td><input type = "long" name = "wid" value = "${w.getWorkorderId()}" readonly style="width: 46px; "></td>
-         								<td id=workDes name = "description">${w.getDescription()}</td>
-         								<td id=workPL name = "status">${w.getStatus()}</td>
-         								<td id=workStatus name = "priority">${w.getPriorityLevel()}</td> 
-         								<td><button  name = "submit" value="removeWorker" class="btn btn-outline btn-primary btn-lg">Unassign this Worker</button></td>
-         							
-         							</tr>
-         						</form>
+
            
-        						</c:forEach>
-           						</tbody>  
-                           
-                      
-						</table>
-
-                                 
-                         <h3>Outstanding Work Orders</h3>
-                 		<table id="employeeGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Work Order ID</th>
-                                    <th>Description</th>
-                                    <th>Status</th>
-                                    <!-- <th>SSN</th> -->
-                                    <th>Priority Level</th>
-                                  <!--   <th>Age</th>
-                                    <th>isAdmin</th> -->
-                                </tr>
-                            </thead>
-                             <tbody>
-                                
-                                <c:forEach var="x" items="${workOrdersOutstanding}">
-                                
-                                <form method = "POST">
-         							<tr>
-         							
-         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
-         								<td><input type = "long" name = "wid" value = "${x.getWorkorderId()}" readonly style="width: 46px; "></td>
-         								<td id=workDes name = "description">${x.getDescription()}</td>
-         								<td id=workPL name = "status">${x.getStatus()}</td>
-         								<td id=workStatus name = "priority">${x.getPriorityLevel()}</td> 
-         								<td><button  name = "submit" value="removeWorker" class="btn btn-outline btn-primary btn-lg">Unassign this Worker</button></td>
-         							
-         							</tr>
-         						</form>
            
-        						</c:forEach>
-           						</tbody>  
-                           
-                      
-						</table>
-
-<!--                                        <button type="button" class="btn btn-outline btn-primary btn-lg">Assign employees</button></a>
- -->                                    </div>
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-
-                                                                    
+           
+           
+                                                                   
                                                                 </div>
                                                             </div>
                                                         </div>    
@@ -351,60 +267,72 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <h4 class="panel-title">
-                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Add Employees</a>
+                                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Add Building</a>
                                                     </h4>
                                                 </div>
                                                 <div id="collapseTwo" class="panel-collapse collapse">
                                                     <div class="panel-body">
-                                                    
-                                                    
-                                                    
-                                                    
-                                 <form role="form" method="POST" action="employee">
+                                                        <form role="form" method="POST" action="building">
                                         <div class="form-group">
-                                            <label>First name</label>
-                                            <input class="form-control" type="text" name="empFirstName" placeholder="first name">
+                                            <label>Building Name</label>
+                                            <input class="form-control" type="text" name="buildingName" placeholder="Building name">
                                         </div>
                                         <div class="form-group">
-                                            <label>Last name</label>
-                                            <input class="form-control" type="text" name="empLastName" placeholder="last name">
-                                        </div>
-                                        <div>
-										<label>Position</label>
-										<select class= "form-control" id = "theinput" name = "position" type = "text" onChange = "combo(this,'theinput')">
-											<option>Worker</option>
-											<option>Supervisor</option>
-											<option>Administrator</option>
- <!-- ? -->								</select>	
- 										</div>
-                                        <div class="form-group">
-                                            <label>Age</label>
-                                            <input class="form-control" type="integer" name="age" placeholder="Format: 30">
-                                        </div>
-                                        <!-- <div class="form-group">
-                                            <label>Administrator privileges</label>
-                                            <input class="form-control" type="checkBox" name="isAdmin" placeholder="Format: 'True' or 'False'">
-                                        </div> -->
-                                        <div class="form-group">
-                                            <label>User Name</label>
-                                            <input class="form-control" type="text" name="isAdmin" placeholder="string">
+                                            <label for="dp">Check Cycle</label>
+                                            <input class="form-control" type="date" id="dp" name="checkCycle" placeholder="Format: MM/DD/YYYY ">
+                                        </div> 
+                                        
+                                            
+                                          
+    								  <div class="form-group">
+                                            <label>Street</label>
+                                            <input class="form-control" type="text" name="street" placeholder="Street address">
                                         </div>
                                         <div class="form-group">
-                                            <label>Password</label>
-                                            <input class="form-control" type="text" name="isAdmin" placeholder="string">
+                                            <label>City</label>
+                                            <input class="form-control" type="text" name="city" placeholder="City">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input class="form-control" type="text" name="state" placeholder="State">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ZIP Code</label>
+                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
                                         </div>
                                         
-                                        <table>
- 										 <c:forEach items="${list}" var="item">
-   										 	<tr>
-      										<td><c:out value="${item}" /></td>
-    										</tr>
-  										</c:forEach>
-										</table>
-                                        <button type="submit" name = "submit"value="add" class="btn btn-default">Submit</button>
+                                        <div class="form-group">
+                                        <fieldset border="">
+                                            <legend>Point of Contact</legend>
+                                            <label for="pocName">Name</label>
+                                            <input class="form-control" type="number" name="pocName" placeholder="Format: 12345">
+                                        </fieldset>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>POC </label>
+                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>ZIP Code</label>
+                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
+                                        </div> 
+                                         
+                                        <script src="js/jquery.min.js"></script>
+    									<script src="js/jquery-ui.min.js"></script>
+    									<script src="js/bootstrap.min.js"></script>
+   										<script>
+     									 $( "#dp" ).datepicker({
+										changeMonth: true,
+										changeYear: true
+										 });
+    									</script>
+
+                                        
+
+                                        <button type="submit"name = "submit" value="Add" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
-                                       <!-- <input type="submit" value="Add" /> -->
-                               </form>
+                                    <!-- <input type="submit" value="Add" /> -->
+                                    </form>
                                                     </div>
                                                 </div>
                                             </div>

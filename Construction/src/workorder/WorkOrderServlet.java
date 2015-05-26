@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import supplies.Supplies;
 import supplies.SuppliesDao;
 import employee.*;
+import buiding.*;
 
 
 @WebServlet(name = "WorkOrderServlet", urlPatterns={"/workorder"})
@@ -28,6 +29,7 @@ private static final long serialVersionUID = 1L;
 @EJB EmployeeDao employeeDao;
 @EJB WorkOrderDao workorderDao;
 @EJB SuppliesDao suppliesDao;
+@EJB BuildingDao buildingDao;
 List<Employee> inWorkEmployeeList = null;
 List<Supplies> supplies = null;
 Long workorderId = null;
@@ -44,6 +46,7 @@ throws ServletException, IOException {
 request.setAttribute("workorders", workorderDao.getWorkOrders());
 request.setAttribute("employees", employeeDao.getEmployees());
 request.setAttribute("supplies", suppliesDao.getAllSupplies());
+request.setAttribute("buildings", buildingDao.getAllBuildings());
 //based on global variable - set when workorder is selected on admin-viewWorkOrders.jsp
 //get employees not assigned to anything that are worker-position
 request.setAttribute("availableWorkers", workorderDao.getAvailableWorkers());
@@ -174,6 +177,7 @@ else if (action.equalsIgnoreCase("assignWorker")){
 			
 			selectedEmployee = employeeDao.findEmployeeById(eid);
 		} catch (Exception e) {}
+		
 	
 }
 

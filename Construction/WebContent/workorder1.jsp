@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.*,workorder.WorkOrder"%>
 <%@page import="java.util.*,employee.Employee"%>
-<%@page import="java.util.*,buiding.Building"%>
+<%@page import="java.util.*,buiding.BuildingServlet, buiding.Building"%>
 <%@page import="java.util.*,supplies.Supplies"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -185,7 +185,7 @@
          								<td id=workDes name = "description">${wr.getDescription()}</td>
          								<td id=workPL name = "priorityLevel">${wr.getPriorityLevel()}</td>
          								<td id=workStatus name = "status">${wr.getStatus()}</td> 
-         								<td><button  name = "submit" value="selectWorkOrder" class="btn btn-outline btn-primary btn-lg">Select</button></td>
+         								<td><button   name = "submit" value="selectWorkOrder" class="btn btn-outline btn-primary btn-lg">Select</button></td>
          							
          							</tr>
          						</form>
@@ -259,8 +259,8 @@
                        						 <tr>
                        						 <td> </td>
                        						 <td>
-                       						 <button  name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>     
-                       						 <button  name="submit" value="updateRow" class="btn btn-default">Update</button>
+                       						 <button   name = "submit" value = "deleteRow"  class="btn btn-default">Delete</button>     
+                       						 <button   name="submit" value="updateRow" class="btn btn-default">Update</button>
                        						 </td>
                        						 </tr>
                        					 </form>
@@ -294,7 +294,7 @@
          								<td id=workDes name = "firstName">${e.getEmpFirstName()}</td>
          								<td id=workPL name = "lastName">${e.getEmpLastName()}</td>
          								<td id=workStatus name = "position">${e.getPosition()}</td> 
-         								<td><button  name = "submit" value="removeWorker" class="btn btn-outline btn-primary btn-lg">Unassign this Worker</button></td>
+         								<td><button  type = "submit" name = "submit"  value="removeWorker" class="btn btn-outline btn-primary btn-lg">Unassign Worker</button></td>
          							
          							</tr>
          						</form>
@@ -324,7 +324,7 @@
                                 
                                 <c:forEach var="ea" items="${availableWorkers}">
                                 
-                                <form method = "POST">
+                                <form method = "POST" >
          							<tr>
          							
          								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
@@ -333,7 +333,7 @@
          								<td id=workPL name = "lastName">${ea.getEmpLastName()}</td>
          								<td id=workStatus name = "position">${ea.getPosition()}</td>
          								<td id=workStatus name = "position">${ea.getInWork()}</td>  
-         								<td><button  name = "submit" value="assignWorker" class="btn btn-outline btn-primary btn-lg">Assign this worker</button></td>
+         								<td><button  name = "submit"  value="assignWorker" class="btn btn-outline btn-primary btn-lg">Assign Worker</button></td>
          							
          							</tr>
          						</form>
@@ -433,22 +433,34 @@
                                                                         <table id="workOrderInfoGrid" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th>
-                                                                                        Work Order ID
-                                                                                    </th>
-                                                                                    <th>
-                                                                                        Description
-                                                                                    </th>
+                                                                                    <th>Building Name</th>
+			           																 <th>Point of Contact</th>
+			           																 <th>Street</th>
+			          																 <th>City</th>
+			           																 <th>State</th>
+			            															 <th>Zip</th>
                                                                                 </tr>
                                                                             </thead>
-                                                                                <tr>
-                                                                                    <td>
-
-                                                                                    </td>
-                                                                                    <td>
-
-                                                                                    </td>
-                                                                                </tr>
+                                                                            <tbody>
+                                                                                <c:forEach var="b" items="${buildings}">
+                                
+                               													  <form method = "POST">
+         																			<tr>
+         							
+         																		<td><input type = "long" name = "bid" value = "${b.getId()}" readonly style="width: 46px; "></td>
+         																		<td id=workDes name = "buildingName">${b.getBuildingName()}</td>
+         																		<td id=workPL name = "poc">${b.getPocName()}</td>
+         																		<td id=workStatus name = "street">${b.getStreet()}</td> 
+         																		<td id=workPL name = "city">${b.getCity()}</td>
+         																		<td id=workStatus name = "state">${b.getState()}</td> 
+         																		<td id=workStatus name = "zip">${b.getZip()}</td> 
+         																		<td><button  name = "submit" value="assignBuilding" class="btn btn-outline btn-primary btn-lg">Assign to Building</button></td>
+         							
+         							</tr>
+         						</form>
+           
+        						</c:forEach>
+                                                                              </tbody>
                                                                         </table>
 
                                                                     </div>
@@ -623,6 +635,23 @@
         var id = document.getElementById('getWorkId').value;
         alert(id);
     }
+    </script>
+    
+    <script>
+ // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+    } 
+
+    // With HTML5 history API, we can easily prevent scrolling!
+    $('.nav-tabs a').on('shown', function (e) {
+        if(history.pushState) {
+            history.pushState(null, null, e.target.hash); 
+        } else {
+            window.location.hash = e.target.hash; //Polyfill for old browsers
+        }
+    })
     </script>
 
 </body>
