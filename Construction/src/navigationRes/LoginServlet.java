@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
 		        request.setAttribute("employees", employeeDao.getEmployees());
 		        request.setAttribute("workorders", workorderDao.getWorkOrders());*/
 		    	request.getRequestDispatcher("/login.jsp").forward(request, response);
-		        request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
+		        //request.getRequestDispatcher("/admin-dashboard.jsp").forward(request, response);
 		        
 		    }
 		 
@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 		    
 		
 		    	String action = request.getParameter("submit");
-		    	System.out.print("the servlet dopost ran, ");
+		    	
 		    	if(action.equalsIgnoreCase("login")){
 		        	System.out.print("login was pushed, ");
 		        	String username = request.getParameter("username");

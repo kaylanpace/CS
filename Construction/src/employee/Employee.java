@@ -84,14 +84,13 @@ public class Employee implements Serializable {
     
   
  
-    public Employee(String empFirstName, String empLastName,  String position, Date dob, boolean isAdmin, String userName, String password) {
+    public Employee(String empFirstName, String empLastName,  String position, Date dob,  String userName, String password) {
        
         this.empFirstName = empFirstName;
         this.empLastName = empLastName;
         this.position = position;
         this.dob = dob;
         this.age = getAge(this.dob);
-        this.isAdmin = isAdmin;
         this.userName = userName;
         this.password = password;
         

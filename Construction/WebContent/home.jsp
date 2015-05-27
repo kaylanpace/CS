@@ -44,7 +44,7 @@
                 <ul class="nav navbar-nav navbar-right">
               
                    <li>
-                        <a href="login.jsp">LogIn</a>
+                        <a href="login.jsp">Log In</a>
                     </li>
 
                     

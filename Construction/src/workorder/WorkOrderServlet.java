@@ -32,10 +32,11 @@ private static final long serialVersionUID = 1L;
 @EJB BuildingDao buildingDao;
 List<Employee> inWorkEmployeeList = null;
 List<Supplies> supplies = null;
+List<Supplies> assignedSupplies = null;
 Long workorderId = null;
 WorkOrder selectedWorkOrder = null;
 Employee selectedEmployee = null;
-
+Building assignedBuilding = null;
 
 @Override
 public void doGet(
@@ -47,6 +48,15 @@ request.setAttribute("workorders", workorderDao.getWorkOrders());
 request.setAttribute("employees", employeeDao.getEmployees());
 request.setAttribute("supplies", suppliesDao.getAllSupplies());
 request.setAttribute("buildings", buildingDao.getAllBuildings());
+
+if (workorderId !=null){
+	assignedBuilding = workorderDao.getAssignedBuilding(workorderId);
+	request.setAttribute("buildingAssigned", assignedBuilding);
+}
+else
+	request.setAttribute("buildingAssigned", assignedBuilding);
+
+
 //based on global variable - set when workorder is selected on admin-viewWorkOrders.jsp
 //get employees not assigned to anything that are worker-position
 request.setAttribute("availableWorkers", workorderDao.getAvailableWorkers());
@@ -57,14 +67,11 @@ try {
 
 if(workorderId!=null){
 	//get employees assiged to a work-order
-request.setAttribute("inWorkEmployees", workorderDao.getAssignedEmployees(workorderId));
-//get assigned supplies
-request.setAttribute("assignedSupplies", supplies);
+	request.setAttribute("inWorkEmployees", workorderDao.getAssignedEmployees(workorderId));
+	//get assigned supplies
+//	assignedSupplies = workorderDao.getSupplies(workorderId);
+//	request.setAttribute("assignedSupplies", assignedSupplies);
 }
-
-
-
-
 
 
 
@@ -125,19 +132,23 @@ else if (action.equalsIgnoreCase("deleteRow")){
 	String status = request.getParameter("woStatus");
 	String expectedFinishstr = request.getParameter("woExpectedFinish");
 	String finishDate = request.getParameter("woFinishDate");
+	if (workorderId!=null){
     try {
     	workorderDao.removeWorkOrder(workorderId);
 	} catch (Exception e) {}
+	}
 	System.out.print("delete row was pushed, id = "+workorderId);
 }
 else if (action.equalsIgnoreCase("updateRow")){
 	System.out.print("updateRow button pushed");
 //	Long woId = Long.parseLong(request.getParameter("woId"));
 	String description = request.getParameter("woDescription");
+	String comments = request.getParameter("woComments");
 	String priorityLevel = request.getParameter("woPriorityLevel");
 	String status = request.getParameter("woStatus");
 	String expectedFinishstr = request.getParameter("woExpectedFinish");
 	String finishDatestr = request.getParameter("woFinishDate");
+	
 	
 	java.util.Date expectedFinish = null;
 	try {
@@ -149,10 +160,11 @@ else if (action.equalsIgnoreCase("updateRow")){
 	finishDate = new SimpleDateFormat("MM-dd-yyyy").parse(finishDatestr);
 	}catch (ParseException e) {}
 	
-	
+	if (workorderId!=null){
 	 try {
-		 workorderDao.updateWorkOrderFields(workorderId,description,priorityLevel,status,expectedFinish,finishDate);     		   
+		 workorderDao.updateWorkOrderFields(workorderId,description,priorityLevel,status,expectedFinish,finishDate,comments);     		   
 	    } catch (Exception e) {}
+	}
 }
 else if (action.equalsIgnoreCase("selectWorkOrder")){
 	System.out.print("select was pushed, workorder id is = "+this.workorderId);
@@ -170,13 +182,14 @@ else if (action.equalsIgnoreCase("selectWorkOrder")){
 else if (action.equalsIgnoreCase("assignWorker")){
 	Long eid = Long.parseLong(request.getParameter("eid"));
 	System.out.print("assign a worker. their id is "+eid);
-	
+	if(workorderId >0){
 		try {
 			employeeDao.updateInWork(eid, true);
 			employeeDao.setAssignedTo(eid,workorderId);
 			
 			selectedEmployee = employeeDao.findEmployeeById(eid);
 		} catch (Exception e) {}
+	}
 		
 	
 }
@@ -206,11 +219,12 @@ else if (action.equalsIgnoreCase("assignSupplies")){
 	
 	Long sid = Long.parseLong(request.getParameter("sid"));
 	System.out.print("assignSupplies pushed: workorderId is"+ workorderId+", sid is "+sid);
-	if (workorderId!=0){
-	suppliesDao.updateAssignedTo(sid,workorderId);
-	workorderDao.updateAddSupply(workorderId,sid);
-						//supplies = suppliesDao.getSuppliesAssigned(workorderId);
-	supplies = convertLongToSupplyList(workorderDao.findById(workorderId).getSupplies());
+	if (workorderId!=null){
+//	suppliesDao.updateAssignedTo(sid,workorderId);
+    workorderDao.updateAddSupply(workorderId,sid);
+//	supplies = suppliesDao.getSuppliesAssigned(workorderId);
+//	supplies = (List<Supplies>)workorderDao.getSupplies(workorderId);
+	
 	}
 	
 }
@@ -219,17 +233,21 @@ else if (action.equalsIgnoreCase("removeSupply")){
 	Long sid = Long.parseLong(request.getParameter("sid"));
 	suppliesDao.removeSupply(sid, workorderId);
 }
+else if (action.equalsIgnoreCase("assignBuilding")){
+	long bId = Long.parseLong(request.getParameter("bid"));
+	if (workorderId>0){
+	workorderDao.updateBuildingAssigned(workorderId, bId);
+	this.assignedBuilding = workorderDao.getAssignedBuilding(workorderId);
+	}
+	System.out.print("Building id is "+bId+"workorderId is "+workorderId);
+}
+else if (action.equalsIgnoreCase("unassignBuilding")){
+	workorderDao.updateBuildingAssigned(workorderId, (long)0);
+	this.assignedBuilding = null;
+}
 
 
 doGet(request, response);
 }
-public List<Supplies> convertLongToSupplyList(List<Long> list){
-	List<Supplies> s = new ArrayList<Supplies>();
-	for(int i =0;i<list.size();i++){
-		
-		s.add(suppliesDao.findById(list.get(0)));
-	}
-	return s;
-	
-}
+
 }

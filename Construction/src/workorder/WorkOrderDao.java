@@ -7,13 +7,16 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.PersistenceContext;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+import buiding.Building;
 import employee.Employee;
+import supplies.*;
  
 @Stateless
 public class WorkOrderDao {
@@ -22,7 +25,7 @@ public class WorkOrderDao {
     //EntityManager em = emf.createEntityManager();
      //Injected database connection:
     @PersistenceContext private EntityManager em;
- 
+    @EJB SuppliesDao suppliesDao;
     public void openTransaction(){
     	em.getTransaction().begin();
     }
@@ -34,7 +37,18 @@ public class WorkOrderDao {
     public void persist(WorkOrder wo) {
     		em.persist(wo);
     }
+    //use next 2 methods for updating building
+    public void updateBuildingAssigned(long woId, long bId){
+    	WorkOrder w = em.find(WorkOrder.class, woId);
+    	w.setBuildingAssignedTo(bId);
+    	em.persist(w);
+    }
     
+    public Building getAssignedBuilding(long woId){
+    	WorkOrder w = em.find(WorkOrder.class, woId);
+    	Building b =  em.find(Building.class, w.getBuildingAssignedTo());
+    	return b;
+    }
     
  
     // Retrieves all the workOrder:
@@ -97,13 +111,14 @@ public class WorkOrderDao {
 	}
 	public void updateWorkOrderFields(Long woId, String description,
 			String priorityLevel, String status, Date expectedFinish,
-			Date finishDate) {
+			Date finishDate, String comments) {
 		 WorkOrder w = em.find(WorkOrder.class, woId);		
 		 w.setDescription(description);
 		 w.setExpectedFinish(expectedFinish);
 		 w.setFinishDate(finishDate);
 		 w.setPriorityLevel(priorityLevel);
 		 w.setStatus(status);
+		 w.setComments(comments);
 		 em.persist(w);
 		 
 		 
@@ -131,6 +146,25 @@ public class WorkOrderDao {
 			em.persist(w);
 		}
 	}
-	
+	public List<Supplies> getSupplies(long woId){
+		WorkOrder w = em.find(WorkOrder.class, woId);
+		List<Long> list = w.getSupplies();
+		List<Supplies> s = new ArrayList<Supplies>();
+		for(int i =0;i<list.size();i++){
+			
+			s.add(suppliesDao.findById(list.get(0)));
+		}
+		return s;
+		
+	}
+	public List<Supplies> convertLongToSupplyList(List<Long> list){
+		List<Supplies> s = new ArrayList<Supplies>();
+		for(int i =0;i<list.size();i++){
+			
+			s.add(suppliesDao.findById(list.get(0)));
+		}
+		return s;
+		
+	}
     
 }

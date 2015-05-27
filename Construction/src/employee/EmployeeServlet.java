@@ -67,11 +67,11 @@ public class EmployeeServlet extends HttpServlet {
 	        }
             
             //int age = Integer.parseInt(request.getParameter("age"));
-            boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
+           // boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
             String userName = request.getParameter("userName");
             String password = request.getParameter("password");
             
-            employeeDao.persist(new Employee(firstName, lastName, position, dob, isAdmin, userName, password));
+            employeeDao.persist(new Employee(firstName, lastName, position, dob, userName, password));
            
             System.out.print("add was pushed");
         }

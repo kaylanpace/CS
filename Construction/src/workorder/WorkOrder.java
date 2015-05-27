@@ -55,6 +55,11 @@ private Date finishDate;
 private List<Long> supplies;
 
 
+@Column(name ="buildingAssignedTo")
+private long buildingAssignedTo;
+
+
+
 public List<Long> getSupplies() {
 	return supplies;
 }
@@ -195,6 +200,14 @@ return comments;
 
 public void setComments(String comments) {
 this.comments = comments;
+}
+
+public long getBuildingAssignedTo() {
+	return buildingAssignedTo;
+}
+
+public void setBuildingAssignedTo(long buildingAssignedTo) {
+	this.buildingAssignedTo = buildingAssignedTo;
 }
 
 @Override

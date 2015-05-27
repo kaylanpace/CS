@@ -197,19 +197,6 @@
                                                                 <input class="form-control" type="date" id="dp" name="empDOB">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Administrator</label>
-                                                                <div class="radio">
-                                                                    <label>
-                                                                        <input type="radio" name="isAdmin" id="optionsRadios1" value="False" checked>No
-                                                                    </label>
-                                                                </div>
-                                                                <div class="radio">
-                                                                    <label>
-                                                                        <input type="radio" name="isAdmin" id="optionsRadios2" value="True">Yes
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
                                                                 <label>Username</label>
                                                                 <input class="form-control" type="text" name="userName">
                                                             </div>
@@ -217,6 +204,7 @@
                                                                 <label>Password</label>
                                                                 <input class="form-control" type="text" name="password">
                                                             </div>
+                                                            
                                                             <button type="submit" name="submit" value="Add" class="btn btn-default">Submit</button>
                                                             <button type="reset" class="btn btn-default">Reset</button>
                                                             

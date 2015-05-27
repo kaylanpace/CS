@@ -41,7 +41,7 @@ private Date expirationDate;
 private Date checkCycle;
 
 @Column(name="assignedTo")
-private List<Long> assignedTo = new ArrayList<Long>();
+private long assignedTo;
 
 @Column(name="inventoryLevel")
 private int inventoryLevel;
@@ -54,6 +54,8 @@ private String pocPhone;
 
 @Column(name="pocEmail")
 private String pocEmail; 
+
+
 
 @OneToOne(optional=true)
 @JoinColumn(name="pocId", unique=false, nullable=true, updatable=true)
@@ -213,22 +215,19 @@ this.pocEmail = pocEmail;
 }
 
 
-public List<Long> getAssignedTo() {
+
+public long getAssignedTo() {
 	return assignedTo;
 }
 
 
 
-public void setAssignedTo(List<Long> assignedTo) {
+public void setAssignedTo(long assignedTo) {
 	this.assignedTo = assignedTo;
 }
 
-public void addWOtoAssignedTo(long w){
-	assignedTo.add(w);
-}
-public void removeFromAssignedTo(long w){
-	assignedTo.remove(w);
-}
+
+
 public int getInventoryLevel() {
 	return inventoryLevel;
 }

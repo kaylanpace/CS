@@ -138,52 +138,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
-    
-    <!-- DataTables JavaScript -->
-    <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="dist/js/sb-admin-2.js"></script>
-
-    <!-- Dynamic Table JavaScript -->
-    <script>
-    $(document).ready(function() {
-        $('#workorderGrid').dataTable();
-    } );
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#employeeGrid').dataTable();
-    } );
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#buildingInfoGrid').dataTable();
-    } );
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#suppliesGrid').dataTable();
-    } );
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#pocGrid').dataTable();
-    } );
-    </script>
-    
-    <!-- Date Picker JavaScript -->
-    <script src="js/jquery-ui.min.js"></script>
-    <script>
-     $( "#fd" ).datepicker({
-            changeMonth: true,
-            changeYear: true
-             });
-    </script>
 
 </body>
 

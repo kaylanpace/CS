@@ -5,31 +5,52 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import poc.POC;
+
 //import workorder.WorkOrder;
 
 
 
 @Entity
+@Table(name="Building")
 public class Building implements Serializable {
 	private static final long serialVersionUID = 1L;
 	 
     // Persistent Fields:
     @Id @GeneratedValue 
-    Long Id;  
-	String buildingName;
+    @Column(name="Id")
+    Long Id;
+    
+    @Column(name="buildingName")
+	private String buildingName;
+    
 	@Temporal(TemporalType.DATE)
-	Date checkCycle;
-	String POC;
-	String street;
-	String city;
-	String state;
-	String country;
-	int zip;
-	String pocName;
-	String pocPhone;
-	String pocEmail;
+	@Column(name="checkCycle")
+	private Date checkCycle;
+	
+	@Column(name="street")
+	private String street;
+	
+	@Column(name="city")
+	private String city;
+	
+	@Column(name="state")
+	private String state;
+	
+	@Column(name="country")
+	private String country;
 
-   
+	@Column(name="zip")
+	private int zip;
+	
+	@Column(name="pocName")
+	private String pocName;
+	
+	@Column(name="pocPhone")
+	private String pocPhone;
+	
+	@Column(name="pocEmail")
+	private String pocEmail;
 
     // Constructors:
     public Building() {
@@ -38,7 +59,8 @@ public class Building implements Serializable {
     
   
  
-    public Building(String buildingName, Date checkCycle, String street, String city, String state, int zip, String pocName, String pocPhone, String pocEmail) {
+    public Building(String buildingName, Date checkCycle, String street, String city, String state, int zip, String pocName
+    		, String pocPhone, String pocEmail) {
        
         this.buildingName = buildingName;
         this.checkCycle = checkCycle;
@@ -50,11 +72,9 @@ public class Building implements Serializable {
         this.pocPhone = pocPhone;
         this.pocEmail = pocEmail;
         
-        
-        
     }
     
-    //Access Methods
+    //Accessor Methods
     public Long getId() {
 		return Id;
 	}
@@ -64,9 +84,7 @@ public class Building implements Serializable {
 	public void setId(Long id) {
 		Id = id;
 	}
-
-
-
+	
 	public String getBuildingName() {
 		return buildingName;
 	}
@@ -85,20 +103,8 @@ public class Building implements Serializable {
 
 
 
-	public void setCheckCycle(Date checkCycle) {
+	public void setCheckCycle(java.sql.Date checkCycle) {
 		this.checkCycle = checkCycle;
-	}
-
-
-
-	public String getPOC() {
-		return POC;
-	}
-
-
-
-	public void setPOC(String pOC) {
-		POC = pOC;
 	}
 
 
@@ -161,11 +167,47 @@ public class Building implements Serializable {
 		this.zip = zip;
 	}
 
+	public String getPocName() {
+		return pocName;
+	}
+
+
+
+	public void setPocName(String pocName) {
+		this.pocName = pocName;
+	}
+
+
+
+	public String getPocPhone() {
+		return pocPhone;
+	}
+
+
+
+	public void setPocPhone(String pocPhone) {
+		this.pocPhone = pocPhone;
+	}
+
+
+
+	public String getPocEmail() {
+		return pocEmail;
+	}
+
+
+
+	public void setPocEmail(String pocEmail) {
+		this.pocEmail = pocEmail;
+	}
+
+
 	// String Representation:
     @Override
     public String toString() {
         return  buildingName + " " + checkCycle
-        		+ " " + street + " " + city + " " + state + " " + zip;
+        		 + " " + street + " " + city + " " + state + " " + zip + " " + pocName
+        		 + " " + pocPhone + " " + pocEmail;
     }
 
 }

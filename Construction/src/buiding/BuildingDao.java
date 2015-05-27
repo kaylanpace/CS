@@ -18,7 +18,7 @@ public class BuildingDao {
 	//EntityManagerFactory emf = Persistence.createEntityManagerFactory("constructionPal.odb");
     //EntityManager em = emf.createEntityManager();
     // Injected database connection:
-	@PersistenceContext private EntityManager em;
+   @PersistenceContext private EntityManager em;
  
     public void openTransaction(){
     	em.getTransaction().begin();
@@ -32,7 +32,6 @@ public class BuildingDao {
     		em.persist(building);
     }
 
- 
     // Retrieves all the building:
     public List<Building> getAllBuildings() {
         TypedQuery<Building> query = em.createQuery(

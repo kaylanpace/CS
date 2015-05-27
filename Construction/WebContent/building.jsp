@@ -1,5 +1,9 @@
 <%@page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.*,workorder.WorkOrder"%>
+<%@page import="java.util.*,employee.Employee"%>
 <%@page import="java.util.*,buiding.Building"%>
+<%@page import="java.util.*,supplies.Supplies"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -180,19 +184,19 @@
                                                 <div id="collapseTwo" class="panel-collapse collapse">
                                                     <div class="panel-body">
                                                         <form role="form" method="POST" action="building">
-                                                            <div class="form-group">
-                                                                <label>Building Name</label>
-                                                                <input class="form-control" type="text" name="buildingName" placeholder="Building name">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Street</label>
-                                                                <input class="form-control" type="text" name="street" placeholder="Street address">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>City</label>
-                                                                <input class="form-control" type="text" name="city" placeholder="City">
-                                                            </div>
-                                                            <div class="form-group">
+					                                        <div class="form-group">
+					                                            <label>Building Name</label>
+					                                            <input class="form-control" type="text" name="buildingName">
+					                                        </div>
+					    								  <div class="form-group">
+					                                            <label>Street Address</label>
+					                                            <input class="form-control" type="text" name="street">
+					                                        </div>
+					                                        <div class="form-group">
+					                                            <label>City</label>
+					                                            <input class="form-control" type="text" name="city">
+					                                        </div>
+					                                         <div class="form-group">
                                                                 <label>State</label>
                                                                 <select class="form-control" name="state">
                                                                     <option>AL</option>
@@ -247,17 +251,15 @@
                                                                     <option>WY</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label>ZIP Code</label>
-                                                                <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="dp">Check Cycle</label>
-                                                                <input class="form-control" type="date" id="dp" name="checkCycle">
-                                                            </div>
-                                                            
-                                                              
-                                                            <div class="form-group">
+					                                        <div class="form-group">
+					                                            <label>ZIP Code</label>
+					                                            <input class="form-control" type="number" name="zip" placeholder="Format: 12345">
+					                                        </div>
+					                                        <div class="form-group">
+					                                            <label for="dp">Check Cycle</label>
+					                                            <input class="form-control" type="date" id="dp" name="checkCycle">
+					                                        </div> 
+					                                        <div class="form-group">
                                                             <fieldset border="">
                                                                 <legend>Point of Contact</legend>
                                                                 <label for="pocName">Name</label>
@@ -266,31 +268,24 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Phone</label>
-                                                                <input class="form-control" type="text" name="pocPhone" placeholder="Format: (123)456-7890">
+                                                                <input class="form-control" type="text" name="pocPhone" placeholder="Format: (123) 456-7890">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>E-mail</label>
                                                                 <input class="form-control" type="text" name="pocEmail">
-                                                            </div>
-                                                            
-
-                                                            <button type="submit" value="Add" class="btn btn-default">Submit</button>
-                                                            <button type="reset" class="btn btn-default">Reset</button>
-                                                        
-                                                        
-                                                        <!-- DatePicker JavaScript -->
-													    <script src="js/jquery.min.js"></script>
-													    <script src="js/jquery-ui.min.js"></script>
-													    <script src="js/bootstrap.min.js"></script>
-													    
-													    <script>
-														    $( "#dp" ).datepicker({
-														    changeMonth: true,
-														    changeYear: true
-														     });
-													    </script>
-                                                        
-                                                        </form>
+                                                            </div> 
+					                                        <script src="js/jquery.min.js"></script>
+					    									<script src="js/jquery-ui.min.js"></script>
+					    									<script src="js/bootstrap.min.js"></script>
+					   										<script>
+					     									 $( "#dp" ).datepicker({
+															changeMonth: true,
+															changeYear: true
+															 });
+					    									</script>
+					                                        <button type="submit"name = "submit" value="Add" class="btn btn-default">Submit</button>
+					                                        <button type="reset" class="btn btn-default">Reset</button>
+					                                    </form>
                                                     </div>
                                                 </div>
                                             </div>

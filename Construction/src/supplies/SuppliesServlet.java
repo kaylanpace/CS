@@ -31,7 +31,7 @@ throws ServletException, IOException {
 request.setAttribute("supplies", suppliesDao.getAllSupplies());
 request.setAttribute("supplySelected", selectedSupply);
 
-request.getRequestDispatcher("/supplies1.jsp").forward(request, response);
+request.getRequestDispatcher("/supplies.jsp").forward(request, response);
 return;
 }
 
