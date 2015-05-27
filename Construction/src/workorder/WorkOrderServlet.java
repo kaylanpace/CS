@@ -32,11 +32,12 @@ private static final long serialVersionUID = 1L;
 @EJB BuildingDao buildingDao;
 List<Employee> inWorkEmployeeList = null;
 List<Supplies> supplies = null;
-List<Supplies> assignedSupplies = null;
+
 Long workorderId = null;
 WorkOrder selectedWorkOrder = null;
 Employee selectedEmployee = null;
 Building assignedBuilding = null;
+List<Supplies> assignedSupplies = null;
 
 @Override
 public void doGet(
@@ -68,10 +69,13 @@ try {
 if(workorderId!=null){
 	//get employees assiged to a work-order
 	request.setAttribute("inWorkEmployees", workorderDao.getAssignedEmployees(workorderId));
-	//get assigned supplies
-//	assignedSupplies = workorderDao.getSupplies(workorderId);
-//	request.setAttribute("assignedSupplies", assignedSupplies);
 }
+if (workorderId!=null){
+	assignedSupplies = suppliesDao.getSuppliesAssigned(workorderId);
+	request.setAttribute("suppliesAssigned", assignedSupplies);
+}
+else
+	request.setAttribute("suppliesAssigned", assignedSupplies);
 
 
 
@@ -218,13 +222,11 @@ else if (action.equalsIgnoreCase("assignSupplies")){
 	//suppliesDao.updateInventoryLevel();
 	
 	Long sid = Long.parseLong(request.getParameter("sid"));
+	double assign = Double.parseDouble(request.getParameter("assignQuantity"));
 	System.out.print("assignSupplies pushed: workorderId is"+ workorderId+", sid is "+sid);
 	if (workorderId!=null){
-//	suppliesDao.updateAssignedTo(sid,workorderId);
-    workorderDao.updateAddSupply(workorderId,sid);
-//	supplies = suppliesDao.getSuppliesAssigned(workorderId);
-//	supplies = (List<Supplies>)workorderDao.getSupplies(workorderId);
-	
+    suppliesDao.updateAssignedTo(sid, workorderId, assign);
+	assignedSupplies = suppliesDao.getSuppliesAssigned(workorderId);
 	}
 	
 }

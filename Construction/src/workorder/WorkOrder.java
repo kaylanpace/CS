@@ -60,6 +60,7 @@ private long buildingAssignedTo;
 
 
 
+
 public List<Long> getSupplies() {
 	return supplies;
 }

@@ -167,7 +167,7 @@
                                                         <table id="example" class="display" cellspacing="0" width="100%">
 			                     <thead>    
                                 <tr>
-                                    <th>Work Order ID</th>
+                                    <th>dWork Order ID</th>
                                     <th>Description</th>
                                     <th>Priority Level</th>
                                     <th>Status</th>

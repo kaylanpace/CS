@@ -139,22 +139,11 @@ public class WorkOrderDao {
                 "Select From Employee WHERE inWork = false ", Employee.class);
 		return query.getResultList();
 	}
-	public void updateAddSupply(Long workorderId, Long sid) {
-		WorkOrder w = em.find(WorkOrder.class, workorderId);
-		if(!w.getSupplies().contains(sid)){
-			w.addSupply(sid);
-			em.persist(w);
-		}
-	}
+
 	public List<Supplies> getSupplies(long woId){
-		WorkOrder w = em.find(WorkOrder.class, woId);
-		List<Long> list = w.getSupplies();
-		List<Supplies> s = new ArrayList<Supplies>();
-		for(int i =0;i<list.size();i++){
-			
-			s.add(suppliesDao.findById(list.get(0)));
-		}
-		return s;
+		TypedQuery query = em.createQuery(
+                "Select From Supplies WHERE assignedTo = "+woId+" ", Employee.class);
+		return query.getResultList();
 		
 	}
 	public List<Supplies> convertLongToSupplyList(List<Long> list){

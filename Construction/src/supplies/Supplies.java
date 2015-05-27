@@ -29,6 +29,10 @@ private String supplyName;
 @Column(name="quantity")
 private double quantity;
 
+@Column(name="quantityAssigned")
+private double quantityAssigned;
+
+
 @Column(name="description")
 private String description;
 
@@ -173,6 +177,15 @@ public POC getPocId() {
 return pocId;
 }
 
+public double getQuantityAssigned() {
+	return quantityAssigned;
+}
+
+
+
+public void setQuantityAssigned(double quantityAssigned) {
+	this.quantityAssigned = quantityAssigned;
+}
 
 
 public void setPocId(POC pocId) {

@@ -380,7 +380,79 @@
 										                                    
 										                                </div>
 										                                <div class="tab-pane fade" id="supplyInfo">
-										                                    <h4>Settings Tab</h4>
+										                                    <h3>Assigned Supplies</h3>
+                           <table id="suppliesGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Supply ID</th>
+                                    <th>Supply Name</th>
+                                    <th>Description</th>
+                                    <!-- <th>SSN</th> -->
+                                    <th>Quantity Assigned</th>
+                                  <!--   <th>Age</th>
+                                    <th>isAdmin</th> -->
+                                </tr>
+                            </thead>
+                             <tbody>
+                                
+                                
+                                <c:forEach var="s" items="${suppliesAssigned}">
+                                <form method = "POST">
+         							<tr>
+         							
+         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
+         								<td><input type = "long" name = "sid" value = "${s.getId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "supplyName">${s.getSupplyName()}</td>
+         								<td id=workPL name = "supplyDescription">${s.getDescription()}</td>
+         								<td id=workStatus name = "supplyQuantity">${s.getQuantityAssigned()}</td> 
+         								<td><button  name = "submit" value="removeSupply" class="btn btn-outline btn-primary btn-lg">Unassign this Supply</button></td>
+         							
+         							</tr>
+         						</form>
+           						</c:forEach>
+        					
+           						</tbody>  
+                           
+                      
+			</table>
+
+                                 
+                                        <h3>Supplies Inventory</h3>
+                 		<table id="suppliesGrid" class="table table-condensed table-hover table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th data-column-id="id" data-type="numeric" data-identifier="true" >Supply ID</th>
+                                    <th>Supply Name</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <!-- <th>Age</th>
+                                    <th>isAdmin</th> -->
+                                </tr>
+                            </thead>
+                             <tbody>
+                                
+                                <c:forEach var="ea" items="${supplies}">
+                                
+                                 <form method = "POST">
+         							<tr>
+         							
+         								<%-- <td  name ="id" value = "${wr.getWorkorderId()}">${wr.getWorkorderId()}</td> --%>
+         								<td><input type = "long" name = "sid" value = "${ea.getId()}" readonly style="width: 46px; "></td>
+         								<td id=workDes name = "supplyName">${ea.getSupplyName()}</td>
+         								<td id=workPL name = "supplyDescription">${ea.getDescription()}</td>
+         								<td id=workStatus name = "supplyQuantity">${ea.getQuantity()}</td>
+         								<td><input style="width: 55px;"  type = "double" value = "${ea.getQuantity()}"  name = "assignQuantity"></td> 
+         								<td><button  name = "submit" value="assignSupplies" class="btn btn-outline btn-primary btn-lg">Assign this Supply</button></td>
+         							
+         							</tr>
+         						</form>
+           
+        						</c:forEach>
+           						</tbody>  
+                           
+                      
+								</table>
 										                                    
 										                                    
 										                                    
